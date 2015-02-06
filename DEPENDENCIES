@@ -1,3 +1,8 @@
 numpy
 nltk
 cmudict
+matplotlib
+
+REMOVE LATER IF POSSIBLE:
+scipy
+curses

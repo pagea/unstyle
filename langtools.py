@@ -1,6 +1,6 @@
 # Miscellaneous natural language programming functions.
 
-import ntlk
+import nltk
 from nltk.corpus import cmudict
 
 d = smudict.dict()

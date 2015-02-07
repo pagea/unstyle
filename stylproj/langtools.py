@@ -9,14 +9,12 @@ import pylab
 d = cmudict.dict()
 
 # Return the ESTIMATED number of syllables in a given word.
-# FIXME: Always returns 0.
 def syllableCount(word):
     if word not in d:
         return None
     else:
-        nsyl(word)
+        return nsyl(word)
 
 def nsyl(word):
     """return the max syllable count"""
-    return max([len([y for y in x if isdigit(y[-1])]) for x in d[word.lower()]])
-
+    return [len(list(y for y in x if y[-1].isdigit())) for x in d[word.lower()]]

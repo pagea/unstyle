@@ -17,19 +17,16 @@ from langtools import syllableCount
 def unique_words(tokens):
     """Return a dictionary tracking unique word occurrences."""
 
-    wordTable = {}
+    wordSet = set()
     for token in tokens:
-        if token not in wordTable:
-            wordTable[token] = 1
-        else:
-            wordTable[token] += 1
-    return wordTable
+        wordSet.add(token)
+    return len(wordSet)
 
 def complexity(tokens):
     """Return the ratio of unique words to total number of words in the
     document.
     """
-   unique = unique_words(tokens)
+    unique = unique_words(tokens)
     wordCount = len(tokens)
     complexityRatio = len(unique) / len(wordCount)
     return complexityRatio
@@ -44,7 +41,7 @@ def avgSentenceLength(tokens):
     return len(tokens) / sentenceCount(tokens)
 
 # TODO: syllableCount is from another online source; make sure it actually works
- properly.
+# properly.
 def avgSyllablesPerWord(tokens):
     """ Return the average number of syllables per word. """
     totalWords = len(tokens)

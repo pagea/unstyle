@@ -19,8 +19,8 @@ alphabet = string.ascii_lowercase + string.ascii_uppercase
 # num_of_occurrences
 def unique_words(tokens):
     wordTable = {}
-    for token in tokens
-        if token not in word table:
+    for token in tokens:
+        if token not in wordTable:
             wordTable[token] = 1
         else:
             wordTable[token] += 1
@@ -28,7 +28,7 @@ def unique_words(tokens):
 
 # Return the ratio of unique words to total number of words in the document.
 def complexity(tokens):
-    unique = unique_words(tokens):
+    unique = unique_words(tokens)
     wordCount = len(tokens)
     complexityRatio = len(unique) / len(wordCount)
     return complexityRatio

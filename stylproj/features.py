@@ -15,7 +15,7 @@ from langtools import syllableCount
 ###############################################################################
 
 def unique_words(tokens):
-"""Return a dictionary tracking unique word occurrences."""
+    """Return a dictionary tracking unique word occurrences."""
 
     wordTable = {}
     for token in tokens:
@@ -25,28 +25,28 @@ def unique_words(tokens):
             wordTable[token] += 1
     return wordTable
 
-"""Return the ratio of unique words to total number of words in the
-document.
-"""
 def complexity(tokens):
-    unique = unique_words(tokens)
+    """Return the ratio of unique words to total number of words in the
+    document.
+    """
+   unique = unique_words(tokens)
     wordCount = len(tokens)
     complexityRatio = len(unique) / len(wordCount)
     return complexityRatio
 
 # TODO: More sophisticated sentence detection.
 def sentenceCount(tokens):
-"""Naive sentence counter that treats periods as sentences."""
+    """Naive sentence counter that treats periods as sentences."""
     return tokens.count('.')
 
 def avgSentenceLength(tokens):
-"""Return the average length of a sentence."""
+    """Return the average length of a sentence."""
     return len(tokens) / sentenceCount(tokens)
 
 # TODO: syllableCount is from another online source; make sure it actually works
  properly.
 def avgSyllablesPerWord(tokens):
-""" Return the average number of syllables per word. """
+    """ Return the average number of syllables per word. """
     totalWords = len(tokens)
     totalSyllables = 0
     
@@ -57,7 +57,7 @@ def avgSyllablesPerWord(tokens):
     return totalSyllables / totalWords
 
 def gunningFog(tokens):
-"""Return the Gunning-Fog readability measure."""
+    """Return the Gunning-Fog readability measure."""
     # Complex words are words with 3 or more syllables.
     complexWords = 1;
     for word in tokens:
@@ -70,13 +70,13 @@ def gunningFog(tokens):
 # TODO: This should include spaces. Tokenized words are probably not an
 # appropriate input for this function.
 def characterSpace(tokens):
-"""Return the total number of characters."""
+    """Return the total number of characters."""
     count = 0
     for word, char in tokens:
         count += 1
 
 def letterSpace(tokens):
-"""Return the total number of letters (excludes spaces and punctuation)"""
+    """Return the total number of letters (excludes spaces and punctuation)"""
     count = 0;
     alphabet = string.ascii_lowercase + string.ascii_uppercase
     for word, char in tokens:
@@ -85,7 +85,7 @@ def letterSpace(tokens):
     return count
 
 def fleschReadingEase(tokens):
-"""Return the Flesch reading ease score."""
+    """Return the Flesch reading ease score."""
     totalWords = len(tokens)
     totalSentences = sentenceCount(tokens)
     totalSyllables = 0

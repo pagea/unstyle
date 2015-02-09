@@ -1,9 +1,14 @@
 TOKENIZATION
+
+    Tokenization is a preprocessing step we can perform on text to make it
+    easier to analyze.
+
     The process of tokenization inludes the following steps in order:
         1. Replacing all hyphens with spaces.
         2. Splitting all words by spaces.
-        3. Removing all punctuation, including commas.
+        3. Removing all punctuation. (do not remove apostrophes in contractions)
+
     For example:
-        "Hi, I'm a test sentence. See?"
+        "Hi, I'm a test sentence: see?"
         becomes
-        ["Hi", "I'm", "a", "test", "sentence", "See"]
+        ["Hi", "I'm", "a", "test", "sentence", "see"]

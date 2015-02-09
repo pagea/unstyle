@@ -67,10 +67,7 @@ def gunningFog(text, tokens):
 
 def characterSpace(text):
     """Return the total number of characters."""
-    count = 0
-    for c in text
-        count += 1
-    return count
+    return len(count)
 
 def letterSpace(tokens):
     """Return the total number of letters (excludes spaces and punctuation)"""

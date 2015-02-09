@@ -23,7 +23,6 @@ def tokenize(text):
     punctuation = "[\.,!?;,:\"\'()\[\]\{\}]"
     noPunc = []
     for word in noSpaces:
-        print(word)
         noPunc.append(re.sub(punctuation, '', word))
     return noPunc
 
@@ -35,13 +34,16 @@ def syllableCount(word):
     number of syllables found in the first pronunciation of a given word.
     """
     if word.lower() not in d:
+        # We couldn't find the word in the dictionary. Use a naive syllable
+        # approximation algorithm.
+        # TODO: Naive syllable approximation
         return None
     else:
         return nsyl(word.lower())
 
 def nsyl(word):
     """Return the minimum syllable count."""
-    # TODO: Near-indecipherable one-liner from stackoverflow; should probably replace
-    # this.
+    # TODO: Near-indecipherable one-liner from stackoverflow; should probably
+    # replace this.
     syllables = [len(list(y for y in x if y[-1].isdigit())) for x in d[word.lower()]]
     return syllables[0]

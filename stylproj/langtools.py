@@ -22,8 +22,26 @@ def syllableCount(word):
         return nsyl(word.lower())
 
 def nsyl(word):
-    """Return the max syllable count.
-    Near-indecipherable one-liner from stackoverflow; should probably replace
-    this."""
+    """Return the max syllable count."""
+    # TODO: Near-indecipherable one-liner from stackoverflow; should probably replace
+    # this.
     syllables = [len(list(y for y in x if y[-1].isdigit())) for x in d[word.lower()]]
     return syllables[0]
+
+def tokenize(text):
+    """Tokenizes a given block of text. See /doc/tokenization for details."""
+    #1. Replace hyphens with spaces
+    noHyphens = text.replace('-', ' ')
+
+    #2. Split all words by spaces.
+    noSpaces = noHyphens.split(' ')
+
+    #3. Remove all punctuation.
+    punctuation = ".!?;,:\"\'()[]{}"
+    noPunc = []
+    for word in noSpaces:
+        for char in word:
+            if char is in punctuation:
+                noPunc = noPunc + word.strip(punctuation)
+            else
+                noPunc = noPunc + word

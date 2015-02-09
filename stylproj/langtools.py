@@ -9,13 +9,17 @@ import pylab
 d = cmudict.dict()
 
 def syllableCount(word):
-    """Return the ESTIMATED number of syllables in a given word. Returns none if the
-    word is not inthe dictionary.
+    """Return the ESTIMATED number of syllables in a given word. Returns none if
+    the word is not inthe dictionary. Be warned that there isn't a deterministic
+    way to count syllables, and that some words with multiple pronunciations
+    have ambiguous numbers of syllables. For words with multiple pronunciations,
+    this method returns the number of syllables found in the first pronunciation
+    of a given word found.
     """
-    if word not in d:
+    if word.lower() not in d:
         return None
     else:
-        return nsyl(word)
+        return nsyl(word.lower())
 
 def nsyl(word):
     """Return the max syllable count.

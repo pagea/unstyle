@@ -34,23 +34,21 @@ def complexity(tokens):
 # TODO: More sophisticated sentence detection.
 def sentenceCount(text):
     """Naive sentence counter that treats periods as sentences."""
-    return text.count('.')
+    return text.count('.') + text.count('?') + text.count('!')
 
 def avgSentenceLength(tokens):
     """Return the average length of a sentence."""
     return len(tokens) / sentenceCount(tokens)
 
-# TODO: syllableCount is from another online source; make sure it actually works
-# properly.
 def avgSyllablesPerWord(tokens):
     """ Return the average number of syllables per word. """
     totalWords = len(tokens)
     totalSyllables = 0
-    
     for word in tokens:
-        count += 1
-        totalSyllables += syllableCount(word)
-
+        syllablesInWord = syllableCount(word)
+        #Ignore words not found in our dictinoary.
+        if syllablesInWord is not None:
+            totalSyllables += syllablesInWord
     return totalSyllables / totalWords
 
 def gunningFog(tokens):
@@ -89,5 +87,5 @@ def fleschReadingEase(tokens):
 
     for word in tokens:
         totalSyllables += syllableCount(word)
-    return 206.835-1.015*(totalWords / totalSentences) - 84.6*(totalSyllables /
-    totalWords)
+    return (206.835-1.015*(totalWords / totalSentences) - 84.6*(totalSyllables /
+    totalWords))

@@ -4,6 +4,7 @@
 
 import string
 from langtools import syllableCount
+from langtools import tokenize
 
 # TODO: Each feature set should probably be a separate class in a separate file,
 # all inside a "features" folder. Implement an "Extractor" class that calls
@@ -51,24 +52,25 @@ def avgSyllablesPerWord(tokens):
             totalSyllables += syllablesInWord
     return totalSyllables / totalWords
 
-def gunningFog(tokens):
+def gunningFog(text, tokens):
     """Return the Gunning-Fog readability measure."""
     # Complex words are words with 3 or more syllables.
-    complexWords = 1;
+    complexWords = 0;
     for word in tokens:
-        if syllableCount(word) >= 3:
-            complexWords += 1
+        syllables = syllableCount(word)
+        if syllables is not None:
+            if syllables >= 3:
+                complexWords += 1
     totalWords = len(tokens)
-    totalSentences = sentenceCount(tokens)
+    totalSentences = sentenceCount(text)
     return 0.4*((totalWords/totalSentences) + 100*(complexWords/totalWords))
 
-# TODO: This should include spaces. Tokenized words are probably not an
-# appropriate input for this function.
-def characterSpace(tokens):
+def characterSpace(text):
     """Return the total number of characters."""
     count = 0
-    for word, char in tokens:
+    for c in text
         count += 1
+    return count
 
 def letterSpace(tokens):
     """Return the total number of letters (excludes spaces and punctuation)"""
@@ -84,8 +86,8 @@ def fleschReadingEase(tokens):
     totalWords = len(tokens)
     totalSentences = sentenceCount(tokens)
     totalSyllables = 0
-
     for word in tokens:
         totalSyllables += syllableCount(word)
+
     return (206.835-1.015*(totalWords / totalSentences) - 84.6*(totalSyllables /
     totalWords))

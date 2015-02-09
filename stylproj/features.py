@@ -28,7 +28,7 @@ def complexity(tokens):
     """
     unique = unique_words(tokens)
     wordCount = len(tokens)
-    complexityRatio = len(unique) / len(wordCount)
+    complexityRatio = unique / wordCount
     return complexityRatio
 
 # TODO: More sophisticated sentence detection.

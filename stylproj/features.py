@@ -32,9 +32,9 @@ def complexity(tokens):
     return complexityRatio
 
 # TODO: More sophisticated sentence detection.
-def sentenceCount(tokens):
+def sentenceCount(text):
     """Naive sentence counter that treats periods as sentences."""
-    return tokens.count('.')
+    return text.count('.')
 
 def avgSentenceLength(tokens):
     """Return the average length of a sentence."""

@@ -1,0 +1,9 @@
+TOKENIZATION
+    The process of tokenization inludes the following steps in order:
+        1. Replacing all hyphens with spaces.
+        2. Splitting all words by spaces.
+        3. Removing all punctuation, including commas.
+    For example:
+        "Hi, I'm a test sentence. See?"
+        becomes
+        ["Hi", "I'm", "a", "test", "sentence", "See"]

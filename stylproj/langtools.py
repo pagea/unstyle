@@ -8,6 +8,25 @@ import pylab
 
 d = cmudict.dict()
 
+def tokenize(text):
+    """Tokenizes a given block of text. See /doc/tokenization for details."""
+    #1. Replace hyphens with spaces
+    noHyphens = text.replace('-', ' ')
+
+    #2. Split all words by spaces.
+    noSpaces = noHyphens.split(' ')
+
+    #3. Remove all punctuation.
+    punctuation = ".!?;,:\"\'()[]{}"
+    noPunc = []
+    for word in noSpaces:
+        for char in word:
+            if char is in punctuation:
+                noPunc = noPunc + word.strip(punctuation)
+            else
+                noPunc = noPunc + word
+    return noPunc
+
 def syllableCount(word):
     """Return the ESTIMATED number of syllables in a given word. Returns none if
     the word is not inthe dictionary. Be warned that there isn't a deterministic
@@ -27,21 +46,3 @@ def nsyl(word):
     # this.
     syllables = [len(list(y for y in x if y[-1].isdigit())) for x in d[word.lower()]]
     return syllables[0]
-
-def tokenize(text):
-    """Tokenizes a given block of text. See /doc/tokenization for details."""
-    #1. Replace hyphens with spaces
-    noHyphens = text.replace('-', ' ')
-
-    #2. Split all words by spaces.
-    noSpaces = noHyphens.split(' ')
-
-    #3. Remove all punctuation.
-    punctuation = ".!?;,:\"\'()[]{}"
-    noPunc = []
-    for word in noSpaces:
-        for char in word:
-            if char is in punctuation:
-                noPunc = noPunc + word.strip(punctuation)
-            else
-                noPunc = noPunc + word

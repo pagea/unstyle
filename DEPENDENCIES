@@ -1,6 +1,7 @@
 python3
 numpy
 nltk
+    nltk punkt
 cmudict
 matplotlib
 

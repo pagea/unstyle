@@ -3,6 +3,8 @@
 # text.
 
 import string
+import numpy
+
 from langtools import syllableCount
 from langtools import tokenize
 
@@ -20,7 +22,7 @@ class Basic9(FeatureSet):
     california, July 2009.
     """
     def unique_words(self, tokens):
-        """Return a dictionary tracking unique word occurrences."""
+        """Return the number of unique words."""
 
         wordSet = set()
         for token in tokens:
@@ -97,4 +99,17 @@ class Basic9(FeatureSet):
         return (206.835 - ((1.015*totalWords) / totalSentences) - 84.6*(totalSyllables /
         totalWords))
 
-    def extractFeatures(self, text
+    def extract(self, text):
+        """Extract Basic-9 features from a given body of text."""
+        # TODO: return a set of feature vectors?
+        tokens = tokenize(text)
+
+        unique_words = unique_words(tokens)
+        complexity = complexity(tokens)
+        sentenceCount = sentenceCount(text)
+        avgSentenceLength = avgSentenceLength(text)
+        avgSyllablesPerWord = avgSyllablesPerWord(tokens)
+        gunningFog = gunningFog(text, tokens)
+        characterSpace = characterSpace(text)
+        letterSpace = letterSpace(text)
+        fleschReadingEase = fleschReadingEase(text, tokens)

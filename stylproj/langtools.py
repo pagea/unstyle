@@ -2,15 +2,21 @@
 # TODO: it's kind of stupid to have curses be a dependency just because of one
 # function
 
+import numpy as np
+
 import pylab
 import re
+
 from curses.ascii import isdigit
 from nltk.corpus import cmudict
 
 d = cmudict.dict()
 
 def tokenize(text):
-    """Tokenizes a given block of text. See /doc/tokenization for details."""
+    """Tokenizes a given block of text. We use this rather than NLTK's
+    tokenizers for more control over the tokenization process. See
+    /doc/tokenization for details.
+    """
     #1. Replace hyphens with spaces
     noHyphens = text.replace('-', ' ')
 
@@ -20,7 +26,7 @@ def tokenize(text):
     #3. Remove all punctuation.
     # TODO: Deal with apostrophes better. We don't want to strip them from
     # contractions.
-    punctuation = "[\.,!?;,:\"\'()\[\]\{\}]"
+    punctuation = "[\.,!?;,:\"\'()\[\]\{\}–]"
     noPunc = []
     for word in noSpaces:
         noPunc.append(re.sub(punctuation, '', word))
@@ -31,7 +37,7 @@ def syllableCount(word):
     the word is not inthe dictionary. Be warned that there is no deterministic
     way to count syllables, and that some words with multiple pronunciations
     have ambiguous numbers of syllables. We cope with this by returning the
-    number of syllables found in the first pronunciation of a given word.
+    first syllable count that we find.
     """
     if word.lower() not in d:
         # We couldn't find the word in the dictionary. Use a naive syllable

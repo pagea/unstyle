@@ -5,15 +5,13 @@
 import string
 import numpy
 
+from feature_extract import FeatureSetExtractor
 from langtools import syllableCount
 from langtools import tokenize
 
 # TODO: PEP8 checks.
 
-###############################################################################
-############################# Basic-9 Feature Set #############################
-###############################################################################
-class Basic9(FeatureSet):
+class Basic9Extractor(FeatureSet):
     """The Basic-9 feature set as described by Brennan and Greenstadt.[1]
 
     [1] Michael Brennan and Rachel Greenstadt. Practical Attacks Against Authorship

@@ -1,8 +1,8 @@
 from abc import ABCMeta, abstractmethod
 
-class FeatureSet:
+class FeatureSetExtractor:
 
-    """The metaclass that all feature sets must extend."""
+    """The metaclass that all feature set extractors must extend."""
     __metaclass__ = ABCMeta
 
     @abstractmethod
@@ -10,6 +10,6 @@ class FeatureSet:
         """The procedure to extract all of the features from a body of text.
         Every instance of FeatureSet MUST override this function.
         
-        MUST return a feature vector.
+        Return a list of features.
         """
         raise NotImplementedError()

@@ -1,5 +1,5 @@
-# features.py
-# Module containing functions related to collecting stylometric features from
+# Basic9.py
+# Module containing functions related to collecting Basic-9
 # text.
 
 import string
@@ -19,8 +19,9 @@ class Basic9(FeatureSet):
     [1] Michael Brennan and Rachel Greenstadt. Practical Attacks Against Authorship
     Recognition Techniques in Proceedings of the Twenty-First Conference on
     Innovative Applications of Artificial Intelligence (IAAI), Pasadena,
-    california, July 2009.
+    California, July 2009.
     """
+
     def unique_words(self, tokens):
         """Return the number of unique words."""
 
@@ -66,7 +67,6 @@ class Basic9(FeatureSet):
             syllables = syllableCount(word)
             if syllables is not None:
                 if syllables >= 3:
-                    print(word + " " + str(syllables))
                     complexWords += 1
         totalWords = len(tokens)
         totalSentences = sentenceCount(text)

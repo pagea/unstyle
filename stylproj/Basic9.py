@@ -103,6 +103,7 @@ class Basic9(FeatureSet):
         """Extract Basic-9 features from a given body of text."""
         # TODO: return a set of feature vectors?
         tokens = tokenize(text)
+        features = []
 
         unique_words = unique_words(tokens)
         complexity = complexity(tokens)

@@ -4,6 +4,8 @@
 
 import string
 import numpy
+import nltk
+import collections
 
 from feature_extract import FeatureSetExtractor
 from langtools import syllableCount
@@ -11,7 +13,7 @@ from langtools import tokenize
 
 # TODO: PEP8 checks.
 
-class Basic9Extractor(FeatureSet):
+class Basic9Extractor(FeatureSetExtractor):
     """The Basic-9 feature set as described by Brennan and Greenstadt.[1]
 
     [1] Michael Brennan and Rachel Greenstadt. Practical Attacks Against Authorship
@@ -32,7 +34,7 @@ class Basic9Extractor(FeatureSet):
         """Return the ratio of unique words to total number of words in the
         document.
         """
-        unique = unique_words(tokens)
+        unique = self.unique_words(tokens)
         wordCount = len(tokens)
         complexityRatio = unique / wordCount
         return complexityRatio
@@ -44,7 +46,7 @@ class Basic9Extractor(FeatureSet):
 
     def avgSentenceLength(self, tokens):
         """Return the average length of a sentence."""
-        return len(tokens) / sentenceCount(tokens)
+        return len(tokens) / self.sentenceCount(tokens)
 
     def avgSyllablesPerWord(self, tokens):
         """Return the average number of syllables per word."""
@@ -67,19 +69,19 @@ class Basic9Extractor(FeatureSet):
                 if syllables >= 3:
                     complexWords += 1
         totalWords = len(tokens)
-        totalSentences = sentenceCount(text)
+        totalSentences = self.sentenceCount(text)
         return 0.4*((totalWords/totalSentences) + 100*(complexWords/totalWords))
 
     def characterSpace(self, text):
         """Return the total number of characters."""
-        return len(count)
+        return len(text)
 
     def letterSpace(self, text):
         """Return the total number of letters (excludes spaces and punctuation)"""
 
         count = 0;
         alphabet = string.ascii_lowercase + string.ascii_uppercase
-        for char in tokens:
+        for char in text:
             if char in alphabet:
                 count += 1
         return count
@@ -87,7 +89,7 @@ class Basic9Extractor(FeatureSet):
     def fleschReadingEase(self, text, tokens):
         """Return the Flesch reading ease score."""
         totalWords = len(tokens)
-        totalSentences = sentenceCount(text)
+        totalSentences = self.sentenceCount(text)
         totalSyllables = 0
         for word in tokens:
             syllablesInWord = syllableCount(word)
@@ -101,14 +103,17 @@ class Basic9Extractor(FeatureSet):
         """Extract Basic-9 features from a given body of text."""
         # TODO: return a set of feature vectors?
         tokens = tokenize(text)
-        features = []
 
-        unique_words = unique_words(tokens)
-        complexity = complexity(tokens)
-        sentenceCount = sentenceCount(text)
-        avgSentenceLength = avgSentenceLength(text)
-        avgSyllablesPerWord = avgSyllablesPerWord(tokens)
-        gunningFog = gunningFog(text, tokens)
-        characterSpace = characterSpace(text)
-        letterSpace = letterSpace(text)
-        fleschReadingEase = fleschReadingEase(text, tokens)
+        features = {
+        "unique_words" : self.unique_words(tokens),
+        "complexity" : self.complexity(tokens),
+        "sentenceCount" : self.sentenceCount(text),
+        "avgSentenceLength" : self.avgSentenceLength(text),
+        "avgSyllablesPerWord" : self.avgSyllablesPerWord(tokens),
+        "gunningFog" : self.gunningFog(text, tokens),
+        "characterSpace" : self.characterSpace(text),
+        "letterSpace" : self.letterSpace(text),
+        "fleschReadingEase" : self.fleschReadingEase(text, tokens)
+        }
+
+        return features

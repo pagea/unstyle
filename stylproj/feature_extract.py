@@ -10,6 +10,6 @@ class FeatureSetExtractor:
         """The procedure to extract all of the features from a body of text.
         Every instance of FeatureSet MUST override this function.
         
-        Return a dictionary of features.
+        Return a list of features.
         """
         raise NotImplementedError()

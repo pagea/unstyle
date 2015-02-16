@@ -101,19 +101,18 @@ class Basic9Extractor(FeatureSetExtractor):
 
     def extract(self, text):
         """Extract Basic-9 features from a given body of text."""
-        # TODO: return a set of feature vectors?
         tokens = tokenize(text)
 
-        features = {
-        "unique_words" : self.unique_words(tokens),
-        "complexity" : self.complexity(tokens),
-        "sentenceCount" : self.sentenceCount(text),
-        "avgSentenceLength" : self.avgSentenceLength(text),
-        "avgSyllablesPerWord" : self.avgSyllablesPerWord(tokens),
-        "gunningFog" : self.gunningFog(text, tokens),
-        "characterSpace" : self.characterSpace(text),
-        "letterSpace" : self.letterSpace(text),
-        "fleschReadingEase" : self.fleschReadingEase(text, tokens)
-        }
+        features = [
+        self.unique_words(tokens),
+        self.complexity(tokens),
+        self.sentenceCount(text),
+        self.avgSentenceLength(text),
+        self.avgSyllablesPerWord(tokens),
+        self.gunningFog(text, tokens),
+        self.characterSpace(text),
+        self.letterSpace(text),
+        self.fleschReadingEase(text, tokens)
+        ]
 
         return features

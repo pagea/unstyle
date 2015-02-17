@@ -1,6 +1,5 @@
 import numpy as np
 #Import feature extractors:
-from basic9 import Basic9Extractor
 #Import classifiers:
 
 class DocumentExtractor:
@@ -12,6 +11,7 @@ class DocumentExtractor:
     :param docs: An arbitrary number of documents (strings of text).
 
     Example:
+    >>>from stylproj.featuresets.basic9 import Basic9Extractor
     >>>b = Basic9Extractor()
     >>>d = DocumentExtractor(b, "text of document 1", "text of document 2")
     >>>d.docExtract()

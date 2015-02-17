@@ -24,17 +24,17 @@ class DocumentExtractor:
         for n in docs:
             self.documents.append(n)
 
-        if documents is None:
+        if self.documents is None:
             raise TypeError
 
     def docExtract(self):
         """Extract features from each document. Return it as a matrix of (number of
         docs) by (number of features)."""
 
-        fv = []
+        self.fv = []
         for doc in self.documents:
-            fv.append(self.featureSet.extract(doc))
+            self.fv.append(self.featureSet.extract(doc))
 
         # Convert to a numpy matrix. After this step, the feature vector should
         # be ready to be input as a training set/target set/etc.
-        return np.array(np.asmatrix(fv))
+        return np.array(np.asmatrix(self.fv))

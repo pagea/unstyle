@@ -22,7 +22,7 @@ def complexity(text):
     document.
     """
     tokens = langtools.tokenize(text)
-    unique = unique_words(tokens)
+    unique = unique_words(text)
     wordCount = len(tokens)
     complexityRatio = unique / wordCount
     return complexityRatio
@@ -31,13 +31,14 @@ def complexity(text):
 def sentenceCount(text):
     """Get the number of sentences using NLTK's sentence tokenizer.
     """
+    print(text)
     return len(nltk.tokenize.sent_tokenize(text))
-
+   
 @register_feat
 def avgSentenceLength(text):
     """Return the average length of a sentence."""
     tokens = langtools.tokenize(text)
-    return len(tokens) / sentenceCount(tokens)
+    return len(tokens) / sentenceCount(text)
 
 @register_feat
 def avgSyllablesPerWord(text):

@@ -19,5 +19,7 @@ def register_feat(func):
     {'characterSpace' : <function characterfeatures.characterSpace}
     """
     print("register_feat called")
-    name = func.__name__
-    featregistry[name] = func
+    name_ = func.__name__
+    featregistry[name_] = func
+
+    return func

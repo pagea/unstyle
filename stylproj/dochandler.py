@@ -1,6 +1,36 @@
 import numpy as np
+import glob
+import os
 #Import feature extractors:
 #Import classifiers:
+
+#class DocumentHandler:
+#    """Given some text, this class will perform feature
+#    extractiowith a DocumentExtractor and train a classifier on the
+#    documents, constructing a profile of a given author."""
+#    def __init__(self, featExtractor, trainingDocs, targetDocs,
+#    self.trainingDocs = [docs for docs in trainingDocs]
+#    self.targetDocs   = [docs for docs in targetDocs]
+#    self.featExtractor = featExtractor
+#    
+#    def setTrainingSet(self, docs):
+#        for each doc in docs:
+#            self.trainingDocs.append(doc)
+#
+#    def setTargetSet(self, docs):
+#        for each doc in docs:
+#            self.targetDocs.append(doc)
+#
+#    def setExtractor(self, extractor):
+#        """Set the feature extractor our handler will use."""
+#        self.featExtractor = extractor
+#
+#class DocumentLoader:
+#    """Load each document in a list of document paths."""
+#    def __init__(self, docs):
+#        docs = 
+#    def loadDoc(self, doc):
+        
 
 class DocumentExtractor:
     """A class that performs feature extraction on a given set of documents.
@@ -17,12 +47,9 @@ class DocumentExtractor:
     >>>d.docExtract()
     """
 
-    def __init__(self, feat_extractor, *docs):
-        self.documents = []
+    def __init__(self, feat_extractor, docs):
+        self.documents = docs
         self.featureSet = feat_extractor
-
-        for n in docs:
-            self.documents.append(n)
 
         if self.documents is None:
             raise TypeError
@@ -36,5 +63,5 @@ class DocumentExtractor:
             self.fv.append(self.featureSet.extract(doc))
 
         # Convert to a numpy matrix. After this step, the feature vector should
-        # be ready to be input as a training set/target set/etc.
+        # be ready to be input as a training or target set.
         return np.array(np.asmatrix(self.fv))

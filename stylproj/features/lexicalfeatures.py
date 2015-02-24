@@ -31,7 +31,6 @@ def complexity(text):
 def sentenceCount(text):
     """Get the number of sentences using NLTK's sentence tokenizer.
     """
-    print(text)
     return len(nltk.tokenize.sent_tokenize(text))
    
 @register_feat

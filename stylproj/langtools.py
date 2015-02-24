@@ -17,8 +17,10 @@ def tokenize(text):
     tokenizers for more control over the tokenization process. See
     /doc/tokenization for details.
     """
-    #1. Replace hyphens with spaces
-    noHyphens = text.replace('-', ' ')
+    #1. Replace hyphens and newlines with spaces
+
+    noNewls = text.replace('\n', ' ')
+    noHyphens = noNewls.replace('-', ' ')
 
     #2. Split all words by spaces.
     noSpaces = noHyphens.split(' ')

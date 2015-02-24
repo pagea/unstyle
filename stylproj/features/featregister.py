@@ -16,10 +16,9 @@ def register_feat(func):
         ...
 
     Then the state of our dictionary becomes:
-    {'characterSpace' : <function characterfeatures.characterSpace}
+    {'characterSpace' : <function characterfeatures.characterSpace>}
     """
-    print("register_feat called")
-    name_ = func.__name__
-    featregistry[name_] = func
+    name = func.__name__
+    featregistry[name] = func
 
     return func

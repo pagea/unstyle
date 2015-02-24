@@ -1,0 +1,4 @@
+./datasets/drexel_1/d/d_06.txt
+./datasets/drexel_1/d/d_07.txt
+./datasets/drexel_1/d/d_08.txt
+./datasets/drexel_1/d/d_09.txt

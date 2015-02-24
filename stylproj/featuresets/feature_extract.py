@@ -1,6 +1,7 @@
 from stylproj.features.featregister import featregistry
 
 class FeatureSetExtractor:
+    """Superclass that all feature sets should extend."""
     def __init__(self):
         self.features = []
 

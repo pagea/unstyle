@@ -15,4 +15,4 @@ with open("filelist.txt", "w") as filelist:
     filelist.writelines(files)
 
 for path in files:
-    print(path)
+    print(repr(path))

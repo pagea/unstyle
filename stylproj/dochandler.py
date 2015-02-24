@@ -64,4 +64,5 @@ class DocumentExtractor:
 
         # Convert to a numpy matrix. After this step, the feature vector should
         # be ready to be input as a training or target set.
-        return np.array(np.asmatrix(self.fv))
+        #return np.array(np.asmatrix(self.fv))
+        return self.fv

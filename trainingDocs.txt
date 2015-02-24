@@ -3,3 +3,8 @@
 ./datasets/drexel_1/d/d_03.txt
 ./datasets/drexel_1/d/d_04.txt
 ./datasets/drexel_1/d/d_05.txt
+./datasets/drexel_1/p/p_01.txt
+./datasets/drexel_1/p/p_02.txt
+./datasets/drexel_1/p/p_03.txt
+./datasets/drexel_1/p/p_04.txt
+./datasets/drexel_1/p/p_05.txt

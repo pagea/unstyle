@@ -3,7 +3,10 @@
 from stylproj.dochandler import DocumentExtractor
 from stylproj.featuresets.basic9 import Basic9Extractor
 from sklearn import svm
-from sklearn.preprocessing import normalize
+from sklearn.naive_bayes import GaussianNB
+from sklearn import preprocessing
+from sklearn.ensemble import RandomForestClassifier
+
 import codecs
 import numpy as np
 
@@ -51,13 +54,16 @@ extracted = extractedFeats.docExtract()
 testFeats = DocumentExtractor(Basic9Extractor(), testStrings)
 testvecs = testFeats.docExtract()
 
-
-#instantiate SVM
+#scale our feature vectors to make them suitable for SVM input
+extracted = preprocessing.scale(extracted)
+#instantiate classifier
 clf = svm.SVC()
-#train SVM, normalizing on y axis
-clf.fit(normalize(extracted, axis=0), labels)
+#train classifier, normalizing on y axis
+#clf.fit(normalize(extracted, axis=0), labels)
+clf.fit(extracted, labels)
 #do some predictions, again with test vectors normalized on the y axis
-normalizedpredic = clf.predict(normalize(testvecs, axis=0))
+#normalizedpredic = clf.predict(normalize(testvecs, axis=0))
+normalizedpredic = clf.predict(preprocessing.scale(testvecs))
 
 #compute number of authors
 authorSet = set()
@@ -65,5 +71,5 @@ for label in labels:
     authorSet.add(label)
 
 print("Total number of potential authors: " + str(len(authorSet)))
-print(str(correct/len(labels) * 100) + "% accuracy on this dataset.")
-#label as training documents
+print(str(clf.score(preprocessing.scale(testvecs), testlabels) * 100) + "% accuracy on this dataset.")
+

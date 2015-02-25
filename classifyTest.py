@@ -57,6 +57,19 @@ clf = svm.SVC()
 #train SVM, normalizing on y axis
 clf.fit(normalize(extracted, axis=0), labels)
 #do some predictions
-clf.predict(normalize(testvecs, axis=0))
+normalizedpredic = clf.predict(normalize(testvecs, axis=0))
 
+#see how many predictions were correct
+correct = 0
+for idx, _ in enumerate(normalizedpredic):
+    if _ == labels[idx]:
+        correct += 1
+
+#compute number of authors
+authorSet = set()
+for label in labels:
+    authorSet.add(label)
+
+print("Total number of potential authors: " + str(len(authorSet)))
+print(str(correct/len(labels) * 100) + "% accuracy on this dataset.")
 #label as training documents

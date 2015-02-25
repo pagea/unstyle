@@ -56,14 +56,8 @@ testvecs = testFeats.docExtract()
 clf = svm.SVC()
 #train SVM, normalizing on y axis
 clf.fit(normalize(extracted, axis=0), labels)
-#do some predictions
+#do some predictions, again with test vectors normalized on the y axis
 normalizedpredic = clf.predict(normalize(testvecs, axis=0))
-
-#see how many predictions were correct
-correct = 0
-for idx, _ in enumerate(normalizedpredic):
-    if _ == labels[idx]:
-        correct += 1
 
 #compute number of authors
 authorSet = set()

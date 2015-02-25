@@ -3,18 +3,24 @@
 from stylproj.dochandler import DocumentExtractor
 from stylproj.featuresets.basic9 import Basic9Extractor
 from sklearn import svm
+from sklearn.preprocessing import normalize
 import codecs
+import numpy as np
 
 #load our list of training document paths (original author)
+labels = []
 paths = []
 with open("trainingDocs.txt", "r") as trainingDocs:
     for line in trainingDocs.readlines():
-        paths.append(line.replace('\n', ''))
+        paths.append(line.split(':')[0])
+        labels.append(line.split(':')[1].replace('\n', ''))
 #load our list of test document paths
+testlabels = []
 testpaths = []
 with open("testDocs.txt", "r") as testDocs:
     for line in testDocs.readlines():
-        testpaths.append(line.replace('\n', ''))
+        testpaths.append(line.split(':')[0])
+        testlabels.append(line.split(':')[1].replace('\n', ''))
 
 #load each file in our list of paths
 trainingStrings = []
@@ -45,14 +51,12 @@ extracted = extractedFeats.docExtract()
 testFeats = DocumentExtractor(Basic9Extractor(), testStrings)
 testvecs = testFeats.docExtract()
 
-#set of labels for our training set
-target = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
 
 #instantiate SVM
 clf = svm.SVC()
-#train SVM
-clf.fit(extracted, target)
+#train SVM, normalizing on y axis
+clf.fit(normalize(extracted, axis=0), labels)
 #do some predictions
-clf.predict(testvecs)
+clf.predict(normalize(testvecs, axis=0))
 
 #label as training documents

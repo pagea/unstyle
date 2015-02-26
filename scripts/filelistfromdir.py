@@ -19,5 +19,5 @@ for directory in sys.argv[2:]:
 with open(sys.argv[1], "w") as filelist:
     filelist.writelines(files)
 
-for path in files:
-    print(repr(path))
+#for path in files:
+#    print(repr(path))

@@ -1,5 +1,6 @@
 #Load, train, and classify documents.
-#This serves as a prototype to be refactored ASAP.
+#This serves as a prototype for experimenting with document classification. This
+#module should NOT be referred to by any other classes.
 from stylproj.dochandler import DocumentExtractor
 from stylproj.featuresets.basic9 import Basic9Extractor
 from sklearn import svm
@@ -56,13 +57,10 @@ testvecs = testFeats.docExtract()
 
 #scale our feature vectors to make them suitable for SVM input
 extracted = preprocessing.scale(extracted)
-#instantiate classifier
+#instantiate classifier and train it
 clf = svm.SVC()
-#train classifier, normalizing on y axis
-#clf.fit(normalize(extracted, axis=0), labels)
 clf.fit(extracted, labels)
-#do some predictions, again with test vectors normalized on the y axis
-#normalizedpredic = clf.predict(normalize(testvecs, axis=0))
+#do some predictions, again with test vectors scaled
 normalizedpredic = clf.predict(preprocessing.scale(testvecs))
 
 #compute number of authors
@@ -70,6 +68,7 @@ authorSet = set()
 for label in labels:
     authorSet.add(label)
 
-print("Total number of potential authors: " + str(len(authorSet)))
+print("Comparing authors:")
+for n in authorSet:
+    print(n)
 print(str(clf.score(preprocessing.scale(testvecs), testlabels) * 100) + "% accuracy on this dataset.")
-

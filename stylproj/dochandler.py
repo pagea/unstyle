@@ -42,8 +42,8 @@ class DocumentExtractor:
 
     Example:
     >>>from stylproj.featuresets.basic9 import Basic9Extractor
-    >>>b = Basic9Extractor()
-    >>>d = DocumentExtractor(b, "text of document 1", "text of document 2")
+    >>>d = DocumentExtractor(Basic9Extractor(), ["text of document 1", "text of
+    document 2"])
     >>>d.docExtract()
     """
 
@@ -62,7 +62,6 @@ class DocumentExtractor:
         for doc in self.documents:
             self.fv.append(self.featureSet.extract(doc))
 
-        # Convert to a numpy matrix. After this step, the feature vector should
-        # be ready to be input as a training or target set.
+        # Convert to a numpy matrix.
         return np.array(np.asmatrix(self.fv))
         #return self.fv

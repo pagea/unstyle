@@ -1,10 +1,8 @@
+# ipython session on 2/26/2015
 # coding: utf-8
 
 get_ipython().magic('ls ')
 from stylproj.dochandler import DocumentExtractor
-d = DocumentExtractor(Basic9Extractor, ./datasets/C50train/LynneO\'Donnell/116963newsML.txt)
-d = DocumentExtractor(Basic9Extractor(), ./datasets/C50train/LynneO\'Donnell/116963newsML.txt)
-d = DocumentExtractor(Basic9Extractor(), "./datasets/C50train/LynneO\'Donnell/116963newsML.txt")
 from stylproj.featuresets import basic9
 from stylproj.featuresets.basic9 import Basic9Extractor
 d = DocumentExtractor(Basic9Extractor(), "./datasets/C50train/LynneO\'Donnell/116963newsML.txt")
@@ -16,7 +14,6 @@ d2.docExtract()
 d2 = DocumentExtractor(Basic9Extractor(), "Wait a minute, what?")
 d2.docExtract
 d2.docExtract()
-d2 = DocumentExtractor(Basic9Extractor(), "Wait a minute, what?", "Test string 2.")
 d2 = DocumentExtractor(Basic9Extractor(), ["Wait a minute, what?", "Test argument 2. What's going on?"])
 d2.docExtract
 d2.docExtract()
@@ -38,7 +35,7 @@ with open("./datasets/C50train/LynneO'Donnell/133490newsML.txt") as lynne:
 lynneDocs
 d = DocumentExtractor(Basic9Extractor(), lynneDocs)
 d.documents
-d.documents.docExtract()
+#d.documents.docExtract()
 d.docExtract
 d.docExtract()
 d = DocumentExtractor(Basic9Extractor(), lynneDocs, "Trying this again")
@@ -63,7 +60,7 @@ with open("./datasets/C50train/WilliamKazer/101226newsML.txt") as williamk:
 williambad
 badext1 = DocumentExtractor(Basic9Extractor(), williambad)
 badext1.docExtract()
-for num in badext1.docExtract()"
+#for num in badext1.docExtract()"
 for num in badext1.docExtract():
     print(num)
     
@@ -150,36 +147,13 @@ printFeature(d.docExtract())
 printFeatures(d.docExtract())
 d.docExtract()
 d.docExtract()
-def printFeatures(docextractor):
-    for list in docextractor.docExtract():
-        print('\n')
-        	for num in list:
-            		print(str(num))
-            
-def printFeatures(docextractor):
-    for list in docextractor.docExtract():
-        print('\n')
-            for num in list:
-            	print(str(num))
-            
-def printFeatures(docextractor):
-    for list in docextractor.docExtract():
-        print('\n')
-            for num in list:
-                print(str(num))
-            
-def printFeatures(docextractor):
-    for list in docextractor.docExtract():
-        print('\n')
-            for num in list:
-                print(str(num))
-            
+ 
 def printFeatures(docextractor):
     for list in docextractor.docExtract():
         print('\n')
         for num in list:
             print(str(num))
-            
+
 printFeatures(d)
 d
 d2 = DocumentExtractor(Basic9Extractor(), loadAuthorDocs("./datasets/C50train/TanEeLyn/"))
@@ -196,3 +170,30 @@ _ih
 get_ipython().magic('edit 87')
 get_ipython().magic('ls ')
 get_ipython().magic('save ipythonsessionDBGfeatureset 0-116')
+get_ipython().magic('edit 87')
+docdir = "./datasets/C50train/"
+d.docExtract()
+d.docExtract()
+import numpy as np
+np.mean(d.docExtract(), axis=1)
+np.mean(d.docExtract(), axis=0)
+for x in np.mean(d.docExtract(), axis=0):
+    print(x)
+    
+get_ipython().magic('edit 124')
+printMean(d.docExtract())
+#gap1 = good author 1, bap1 = bad author 1
+gap1 = DocumentExtractor(Basic9Extractor(), loadAuthorDocs("./datasets/C50train/LynneO'Donnell/"))
+printMean(gap1.docExtract())
+gap2 = DocumentExtractor(Basic9Extractor(), loadAuthorDocs("./datasets/C50train/MichaelConnor/"))
+printmean(gap2.docExtract())
+printMean(gap2.docExtract())
+bap1 = DocumentExtractor(Basic9Extractor(), loadAuthorDocs("./datasets/C50train/WilliamKazer/"))
+bap2 = DocumentExtractor(Basic9Extractor(), loadAuthorDocs("./datasets/C50train/TanEeLyn/"))
+printMean(bap1)
+printMean(bap1.docExtract())
+printMean(bap2.docExtract())
+printMean(gap1.docExtract())
+printMean(gap2.docExtract())
+get_ipython().magic('save ipythonsessionDBGfeatureset.py 149')
+get_ipython().magic('save ipythonsessionDBGfeatureset.py 0-149')

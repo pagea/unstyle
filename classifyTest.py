@@ -4,9 +4,8 @@
 from stylproj.dochandler import DocumentExtractor
 from stylproj.featuresets.basic9 import Basic9Extractor
 from sklearn import svm
-from sklearn.naive_bayes import GaussianNB
 from sklearn import preprocessing
-from sklearn.ensemble import RandomForestClassifier
+from sklearn import cross_validation
 
 import codecs
 import numpy as np
@@ -18,6 +17,8 @@ with open("trainingDocs.txt", "r") as trainingDocs:
     for line in trainingDocs.readlines():
         paths.append(line.split(':')[0])
         labels.append(line.split(':')[1].replace('\n', ''))
+        #print("Training set with label: " + line)
+
 #load our list of test document paths
 testlabels = []
 testpaths = []
@@ -29,16 +30,15 @@ with open("testDocs.txt", "r") as testDocs:
 #load each file in our list of paths
 trainingStrings = []
 for path in paths:
-    try:
-        with codecs.open(path, "r", encoding = 'utf8') as docString:
+    with codecs.open(path, "r", encoding='utf8',errors='replace') as docString:
             document = docString.read()
             trainingStrings.append(document)
-    except UnicodeDecodeError:
+   # except UnicodeDecodeError:
         #TODO: For now, we alert the user that their document is corrupted. In the
         #future, we ought to try to remove any offending characters from the
         #document and just move on.
-        print("It appears you have tried to load a document that stylproj"
-        " cannot read. Please convert your document to utf-8 and try again.")
+    #    print("It appears you have tried to load a document that stylproj"
+    #    " cannot read. Please remove any non-UTF-8 symbols and try again.")
 
 #load each of our testfile path list
 testStrings = []
@@ -71,4 +71,11 @@ for label in labels:
 print("Comparing authors:")
 for n in authorSet:
     print(n)
-print(str(clf.score(preprocessing.scale(testvecs), testlabels) * 100) + "% accuracy on this dataset.")
+print(str(clf.score(preprocessing.scale(testvecs), testlabels) * 100) + "% score on this dataset.")
+
+#Cross-validation
+print("Computing cross validation...")
+cvIterations = 5
+scores = cross_validation.cross_val_score(clf, extracted, labels,
+cv=cvIterations)
+print("Accuracy by " + str(cvIterations)  + "-fold CV: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))

@@ -58,7 +58,7 @@ testvecs = testFeats.docExtract()
 #scale our feature vectors to make them suitable for SVM input
 extracted = preprocessing.scale(extracted)
 #instantiate classifier and train it
-clf = svm.SVC()
+clf = svm.SVC(kernel='rbf')
 clf.fit(extracted, labels)
 #do some predictions, again with test vectors scaled
 normalizedpredic = clf.predict(preprocessing.scale(testvecs))

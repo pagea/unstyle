@@ -1,6 +1,16 @@
 """The feature extractor register. This keeps track of all active feature extractors.
 You can compose feature sets by accessing this dictionary.
 
+Note that the featregistry is ordered. So, if you have a feature vector that
+looks like
+
+array([1, 50.32, 40.02],
+[5, 23.23, 93.2]),
+
+then you can figure out which column is which feature by iterating over
+featregistry.
+
+
 Use the @register_feat decorator to register a feature extractor with stylproj.
 """
 # FIXME: Right now, the feature registry basically assumes that you only
@@ -29,8 +39,9 @@ Use the @register_feat decorator to register a feature extractor with stylproj.
 # }
 #
 # Unfortunately, this means refactoring any functions that use the featregistry.
+from collections import OrderedDict
 
-featregistry = {}
+featregistry = OrderedDict()
 
 def register_feat(func):
     """Adds decorated function to a dictionary in the form {'name of

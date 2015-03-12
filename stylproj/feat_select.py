@@ -28,8 +28,6 @@ def rank_features(X, y, featureset):
     # Get the names of the feature columns.
     for index, func in enumerate(featureset.features):
         feat_importance[func] = importances[index]
-    print("\nFeat importance dict:")
-    print(str(feat_importance))
 
     # Sort the dictionary by value and return it. 
     return sorted(feat_importance.items(), key=lambda x:x[1], reverse=True)

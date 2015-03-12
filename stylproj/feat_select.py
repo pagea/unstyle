@@ -19,7 +19,7 @@ def rank_features(X, y, featureset):
     and V being its importance. This dictionary will be sorted by importance.
     """
 
-    classifier = ExtraTreesClassifier()
+    classifier = ExtraTreesClassifier(n_estimators=500, n_jobs=-1)
     classifier.fit(X, y)
     importances = classifier.feature_importances_
 
@@ -28,6 +28,8 @@ def rank_features(X, y, featureset):
     # Get the names of the feature columns.
     for index, func in enumerate(featureset.features):
         feat_importance[func] = importances[index]
+
+    print(feat_importance)
 
     # Sort the dictionary by value and return it. 
     return sorted(feat_importance.items(), key=lambda x:x[1], reverse=True)

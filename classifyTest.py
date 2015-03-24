@@ -6,9 +6,11 @@ from stylproj.featuresets.basic9 import Basic9Extractor
 from sklearn import svm
 from sklearn import preprocessing
 from sklearn import cross_validation
+from sklearn.grid_search import GridSearchCV
 
 import codecs
 import numpy as np
+import matplotlib.pyplot as plt
 
 #load our list of training document paths (original author)
 labels = []
@@ -52,15 +54,20 @@ extractedFeats = DocumentExtractor(Basic9Extractor(), trainingStrings)
 extracted = extractedFeats.docExtract()
 
 #extract features from our test documents:
+print("Extracting features...")
 testFeats = DocumentExtractor(Basic9Extractor(), testStrings)
 testvecs = testFeats.docExtract()
 
 #scale our feature vectors to make them suitable for SVM input
+print("Scaling feature vectors...")
 extracted = preprocessing.scale(extracted)
 #instantiate classifier and train it
-clf = svm.SVC(kernel='rbf')
+print("Instantiating classifier...")
+clf = svm.SVC(probability=True, kernel='rbf')
+print("Fitting dataset to classifier...")
 clf.fit(extracted, labels)
 #do some predictions, again with test vectors scaled
+print("Computing predictions...")
 normalizedpredic = clf.predict(preprocessing.scale(testvecs))
 
 #compute number of authors
@@ -73,9 +80,11 @@ for n in authorSet:
     print(n)
 print(str(clf.score(preprocessing.scale(testvecs), testlabels) * 100) + "% score on this dataset.")
 
+testvecsscaled = preprocessing.scale(testvecs)
 #Cross-validation
 print("Computing cross validation...")
 cvIterations = 5
 scores = cross_validation.cross_val_score(clf, extracted, labels,
 cv=cvIterations)
 print("Accuracy by " + str(cvIterations)  + "-fold CV: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+

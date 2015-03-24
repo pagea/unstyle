@@ -57,6 +57,7 @@ def gunningFog(text):
     """Return the Gunning-Fog readability measure."""
     tokens = langtools.tokenize(text)
     # Complex words are words with 3 or more syllables.
+    print(str(tokens))
     complexWords = 0;
     for word in tokens:
         syllables = langtools.syllableCount(word)

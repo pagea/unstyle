@@ -5,7 +5,4 @@ nltk
     wordnet
 cmudict
 matplotlib
-neurolab
-
-REMOVE LATER IF POSSIBLE:
-scipy
+sklearn / scipy

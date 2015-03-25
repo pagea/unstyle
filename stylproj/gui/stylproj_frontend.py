@@ -25,7 +25,7 @@ class StylProj(QMainWindow):
 
     def browseYourDoc_clicked(self):
         filename = QFileDialog.getOpenFileName()
-        stylproj.controller.document_to_anonymize_path = filename
+        stylproj.controller.document_to_anonymize_path = filename[0]
         self.ui.yourdoc.setText(filename[0])
         stylproj.controller.document_to_anonymize = stylproj.controller.load_document(filename[0])
         # Show the text of the document in the text editor and enable it.
@@ -43,11 +43,3 @@ class StylProj(QMainWindow):
         row = self.ui.otherdocslist.currentRow()
         stylproj.controller.other_user_documents_paths.remove(selected.text())
         self.ui.otherdocslist.takeItem(row)
-
-#if __name__ == "__main__":
-#    import sys
-#
-#    app = QApplication(sys.argv)
-#    window = StylProj()
-#    window.show()
-#    sys.exit(app.exec_())

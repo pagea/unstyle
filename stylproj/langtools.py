@@ -4,7 +4,6 @@
 
 import numpy as np
 
-import pylab
 import re
 
 from curses.ascii import isdigit

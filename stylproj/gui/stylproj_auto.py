@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'stylproj.ui'
 #
-# Created: Tue Mar 24 21:20:04 2015
+# Created: Wed Mar 25 05:36:13 2015
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -54,7 +54,9 @@ class Ui_MainWindow(object):
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.yourdoc = QtWidgets.QLineEdit(self.frame)
+        self.yourdoc.setEnabled(True)
         self.yourdoc.setText("")
+        self.yourdoc.setReadOnly(True)
         self.yourdoc.setObjectName("yourdoc")
         self.gridLayout_2.addWidget(self.yourdoc, 0, 0, 1, 1)
         self.browseYourDoc = QtWidgets.QPushButton(self.frame)
@@ -91,9 +93,9 @@ class Ui_MainWindow(object):
         self.browseYourDocs = QtWidgets.QPushButton(self.layoutWidget)
         self.browseYourDocs.setObjectName("browseYourDocs")
         self.verticalLayout_5.addWidget(self.browseYourDocs)
-        self.delete_yourdocs = QtWidgets.QPushButton(self.layoutWidget)
-        self.delete_yourdocs.setObjectName("delete_yourdocs")
-        self.verticalLayout_5.addWidget(self.delete_yourdocs)
+        self.deleteYourDocs = QtWidgets.QPushButton(self.layoutWidget)
+        self.deleteYourDocs.setObjectName("deleteYourDocs")
+        self.verticalLayout_5.addWidget(self.deleteYourDocs)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(spacerItem)
         self.horizontalLayout.addLayout(self.verticalLayout_5)
@@ -198,7 +200,7 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "Other documents written by you:"))
         self.otherdocslist.setToolTip(_translate("MainWindow", "Click the \'browse\' button and select other documents you have written. Hint: Holding the Ctrl button allows you to select multiple documents.<br><br>It is strongly recommended that the combined word count of your documents is at least 6500."))
         self.browseYourDocs.setText(_translate("MainWindow", "Browse"))
-        self.delete_yourdocs.setText(_translate("MainWindow", "Delete"))
+        self.deleteYourDocs.setText(_translate("MainWindow", "Delete"))
         self.stackedNext.setText(_translate("MainWindow", "Next"))
         self.label_3.setText(_translate("MainWindow", "Your documents were successfully analyzed. Your top writing style traits (in order of importance) are:"))
         self.label_7.setText(_translate("MainWindow", "Click on a trait to highlight its occurrences in your document. Right click on highlighted words to receive suggested replacement words, or simply substitute your own. Make changes until told otherwise."))

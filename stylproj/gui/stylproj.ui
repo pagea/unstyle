@@ -162,7 +162,7 @@ p, li { white-space: pre-wrap; }
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="delete_yourdocs">
+                  <widget class="QPushButton" name="deleteYourDocs">
                    <property name="text">
                     <string>Delete</string>
                    </property>
@@ -269,7 +269,7 @@ p, li { white-space: pre-wrap; }
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="resources.qrc">:/icons/img/x.png</pixmap>
+              <pixmap resource="../../../../stylproj/stylproj/gui/resources.qrc">:/icons/img/x.png</pixmap>
              </property>
             </widget>
            </item>
@@ -354,7 +354,8 @@ p, li { white-space: pre-wrap; }
   </action>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../../../../stylproj/stylproj/gui/resources.qrc"/>
+  <include location="../../../../.designer/backup/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'stylproj.ui'
 #
-# Created: Wed Mar 25 05:36:13 2015
+# Created: Thu Mar 26 15:45:33 2015
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -118,12 +118,12 @@ class Ui_MainWindow(object):
         self.label_3.setWordWrap(True)
         self.label_3.setObjectName("label_3")
         self.verticalLayout_4.addWidget(self.label_3)
-        self.tableWidget = QtWidgets.QTableWidget(self.stackedWidgetPage2)
-        self.tableWidget.setRowCount(9)
-        self.tableWidget.setColumnCount(2)
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
-        self.verticalLayout_4.addWidget(self.tableWidget)
+        self.rankTable = QtWidgets.QTableWidget(self.stackedWidgetPage2)
+        self.rankTable.setRowCount(9)
+        self.rankTable.setColumnCount(2)
+        self.rankTable.setObjectName("rankTable")
+        self.rankTable.horizontalHeader().setSortIndicatorShown(False)
+        self.verticalLayout_4.addWidget(self.rankTable)
         self.label_7 = QtWidgets.QLabel(self.stackedWidgetPage2)
         self.label_7.setWordWrap(True)
         self.label_7.setObjectName("label_7")

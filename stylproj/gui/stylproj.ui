@@ -221,7 +221,7 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item>
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableWidget" name="rankTable">
           <property name="rowCount">
            <number>9</number>
           </property>
@@ -269,7 +269,7 @@ p, li { white-space: pre-wrap; }
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="../../../../stylproj/stylproj/gui/resources.qrc">:/icons/img/x.png</pixmap>
+              <pixmap>:/icons/img/x.png</pixmap>
              </property>
             </widget>
            </item>

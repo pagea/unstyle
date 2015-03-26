@@ -11,6 +11,7 @@ from stylproj.gui.stylproj_frontend import StylProj
 # backend imports
 from stylproj.dochandler import DocumentExtractor
 from stylproj.featuresets.basic9 import Basic9Extractor
+from stylproj.feat_select import rank_features_rfe
 
 import codecs
 import glob
@@ -18,7 +19,12 @@ import logging
 import numpy as np
 import os
 import random
+import stylproj
 import sys
+import timeit
+
+#Instance of the frontend
+window = None
 
 # TODO: move to dochandler
 def load_document(docpath):
@@ -44,19 +50,23 @@ def _get_random_doc_paths(directory, numAuthors):
     for auth in authorsToLoad:
         # oh my glob
         docpaths = glob.glob(os.path.join(directory, auth, "*"))
+        print(docpaths)
         paths.extend(docpaths)
-        for _ in enumerate(docpaths):
+        for _ in range(len(docpaths)):
             labels.append(auth)
+            print(auth)
 
-    return zip(paths, labels)
-    
+    print(list(zip(paths, labels)))
+    return list(zip(paths, labels))
+ 
 def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     """Load and classify all documents referenced by the given paths.
-    :returns: A trained classifier.
+    :returns: A classifier trained on the user's documents and a random subset
+    of our corpus.
     """
     document_to_anonymize = load_document(pathToAnonymize)
-    other_user_docs = ""
-    other_author_docs = "" 
+    other_user_docs = []
+    other_author_docs = []
     # Load other documents by the user.
     for path in otherUserDocPaths:
         other_user_docs.append(load_document(path))
@@ -72,13 +82,16 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     # Extract features from all documents using the Basic-9 Feature Set.
     featset = Basic9Extractor()
 
-    userDocFeatures = DocumentExtractor(featset, [document_to_anonymize])
+    # TODO: Make DocumentExtractor work properly with one document
+    docToList = []
+    docToList.append(document_to_anonymize)
+    userDocFeatures = DocumentExtractor(featset, docToList).docExtract()
     # Features from other documents by the user (excludes documentToAnonymize)
     userOtherFeatures = DocumentExtractor(featset, other_user_docs).docExtract()
     # Features from documents by other authors.
     otherAuthorFeatures = DocumentExtractor(featset, other_author_docs).docExtract()
     # Features from documents by other authors AND the user.
-    userAndOtherFeatures = np.vstack(userOtherFeatures, otherAuthorFeatures)
+    userAndOtherFeatures = np.vstack((userOtherFeatures, otherAuthorFeatures))
 
     # Label all of our user's other documents as 'user'.
     userLabels = []
@@ -86,38 +99,60 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
         userLabels.append('user')
 
     # Combine documents and labels. This creates the training set.
-    X = np.vstack(userOtherFeatures, otherAuthorFeatures)
+    X = np.vstack((userOtherFeatures, otherAuthorFeatures))
     y = []
     y.extend(userLabels)
     y.extend(otherAuthorLabels)
 
-    # Instantiate classifier; train on SCALED DATA.
+    # Instantiate classifier; train and predict on scaled data.
+    scaler = preprocessing.StandardScaler().fit(X)
     clf = svm.SVC(probability=True, kernel='rbf')
-    clf.fit(preprocessing.scale(X), y)
+    clf.fit(scaler.transform(X), y)
+    print("Predicted author of doc: " +
+    str(clf.predict(scaler.transform(userDocFeatures))))
 
-    return clf
+    # Get feature ranks
+    stylproj.controller.feature_ranks = rank_features_rfe(scaler.transform(X), y, featset)
+    print(str(feature_ranks))
 
-def readyToclassify():
-    """ The View (frontend) calls this after it has given the controller all of
+    # Tell the frontend we've generated some statistics
+    window.updateStats()
+
+    return (clf, scaler)
+
+def validateInput():
+    # Make sure the user didn't accidentally put document_to_anonymize in the
+    # training set
+    for doc in other_user_documents_paths:
+        if document_to_anonymize_path == doc:
+            return False
+        else:
+            return True
+
+def readyToClassify():
+    """ The frontend calls this after it has given the controller all of
     the requisite input documents.
     """
-    trainOndocs(document_to_anonymize_path,
-                other_user_documents_paths,
-                other_author_paths)
+    validateInput()
+    trained_classifier = train_on_docs(document_to_anonymize_path,
+                                       other_user_documents_paths,
+                                       other_author_paths)
 
 def startGUI():
    app = QApplication(sys.argv)
-   #app.setStype(QStyleFactory.create("motif"))
-   window = StylProj()
-   window.show()
+   stylproj.controller.window = StylProj()
+   stylproj.controller.window.show()
    sys.exit(app.exec_()) 
 
 # File paths
 document_to_anonymize_path = ''
 other_user_documents_paths  = []
 
-# Get the paths of documents from 4 random authors.
+# Get the paths of documents from a set of random authors.
 drexel_dataset_path = os.path.join('datasets', 'drexel_1')
-other_author_paths = _get_random_doc_paths(drexel_dataset_path, 4)
+other_author_paths = _get_random_doc_paths(drexel_dataset_path, 7)
 
+# Training data
 document_to_anonymize = ''
+trained_classifier = None
+feature_ranks = []

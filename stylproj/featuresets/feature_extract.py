@@ -11,10 +11,10 @@ class FeatureSetExtractor:
         """
         self.extractor = None
         self.extractedFeatures = []
-        print("\nNext feature extract cycle: ")
+        #print("\nNext feature extract cycle: ")
         for feature in self.features:
             self.extractor = featregistry[feature]
             self.extractedFeatures.append(self.extractor(text))
-            print("EXTRACTED feature: " + str(featregistry[feature]))
+            #print("EXTRACTED feature: " + str(featregistry[feature]))
 
         return self.extractedFeatures

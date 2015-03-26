@@ -1,5 +1,6 @@
 from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
 from stylproj.gui.stylproj_auto import Ui_MainWindow
 import stylproj.controller
 
@@ -40,6 +41,34 @@ class StylProj(QMainWindow):
 
     def deleteYourDocs_clicked(self):
         selected = self.ui.otherdocslist.currentItem()
-        row = self.ui.otherdocslist.currentRow()
-        stylproj.controller.other_user_documents_paths.remove(selected.text())
-        self.ui.otherdocslist.takeItem(row)
+        # Make sure the user selected a document before trying to delete
+        # anything
+        if selected is not None:
+            row = self.ui.otherdocslist.currentRow()
+            stylproj.controller.other_user_documents_paths.remove(selected.text())
+            self.ui.otherdocslist.takeItem(row)
+        else:
+            pass
+
+    # Controller messages
+    def updateStats(self):
+        # Set up rank table dimensions
+        self.ui.rankTable.setRowCount(len(stylproj.controller.feature_ranks))
+        # Name the headers of the table
+        headers = "Text Features", "Target"
+        self.ui.rankTable.setHorizontalHeaderLabels(headers)
+        headerObj = self.ui.rankTable.horizontalHeader()
+        headerObj.setSectionResizeMode(0, QHeaderView.ResizeToContents)
+
+        print("Rank table size: " + str(len(stylproj.controller.feature_ranks)))
+        # Populate rank table
+        for idx, pair in enumerate(stylproj.controller.feature_ranks):
+            currItem = self.ui.rankTable.item(idx, 0)
+            # If we are setting up the table for the first time, currItem will
+            # not exist.
+            if currItem is None:
+                currItem = QTableWidgetItem(1)
+                currItem.setText(pair[0])
+                self.ui.rankTable.setItem(idx, 0, currItem)
+            else:
+                currItem.setText(feature_ranks[pair[0]])

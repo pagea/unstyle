@@ -1,0 +1,40 @@
+['datasets/drexel_1/g/g_06.txt', 'datasets/drexel_1/g/g_04.txt', 'datasets/drexel_1/g/g_08.txt', 'datasets/drexel_1/g/g_07.txt', 'datasets/drexel_1/g/g_02.txt', 'datasets/drexel_1/g/g_05.txt', 'datasets/drexel_1/g/g_01.txt', 'datasets/drexel_1/g/g_03.txt']
+g
+g
+g
+g
+g
+g
+g
+g
+['datasets/drexel_1/e/e_07.txt', 'datasets/drexel_1/e/e_05.txt', 'datasets/drexel_1/e/e_06.txt', 'datasets/drexel_1/e/e_08.txt', 'datasets/drexel_1/e/e_09.txt', 'datasets/drexel_1/e/e_03.txt', 'datasets/drexel_1/e/e_04.txt', 'datasets/drexel_1/e/e_02.txt', 'datasets/drexel_1/e/e_01.txt']
+e
+e
+e
+e
+e
+e
+e
+e
+e
+['datasets/drexel_1/s/s_01.txt', 'datasets/drexel_1/s/s_06.txt', 'datasets/drexel_1/s/s_02.txt', 'datasets/drexel_1/s/s_07.txt', 'datasets/drexel_1/s/s_08.txt', 'datasets/drexel_1/s/s_05.txt', 'datasets/drexel_1/s/s_03.txt', 'datasets/drexel_1/s/s_04.txt', 'datasets/drexel_1/s/s_09.txt']
+s
+s
+s
+s
+s
+s
+s
+s
+s
+['datasets/drexel_1/c/c_03.txt', 'datasets/drexel_1/c/c_04.txt', 'datasets/drexel_1/c/c_01.txt', 'datasets/drexel_1/c/c_09.txt', 'datasets/drexel_1/c/c_02.txt', 'datasets/drexel_1/c/c_07.txt', 'datasets/drexel_1/c/c_06.txt', 'datasets/drexel_1/c/c_05.txt', 'datasets/drexel_1/c/c_08.txt']
+c
+c
+c
+c
+c
+c
+c
+c
+c
+[('datasets/drexel_1/g/g_06.txt', 'g'), ('datasets/drexel_1/g/g_04.txt', 'g'), ('datasets/drexel_1/g/g_08.txt', 'g'), ('datasets/drexel_1/g/g_07.txt', 'g'), ('datasets/drexel_1/g/g_02.txt', 'g'), ('datasets/drexel_1/g/g_05.txt', 'g'), ('datasets/drexel_1/g/g_01.txt', 'g'), ('datasets/drexel_1/g/g_03.txt', 'g'), ('datasets/drexel_1/e/e_07.txt', 'e'), ('datasets/drexel_1/e/e_05.txt', 'e'), ('datasets/drexel_1/e/e_06.txt', 'e'), ('datasets/drexel_1/e/e_08.txt', 'e'), ('datasets/drexel_1/e/e_09.txt', 'e'), ('datasets/drexel_1/e/e_03.txt', 'e'), ('datasets/drexel_1/e/e_04.txt', 'e'), ('datasets/drexel_1/e/e_02.txt', 'e'), ('datasets/drexel_1/e/e_01.txt', 'e'), ('datasets/drexel_1/s/s_01.txt', 's'), ('datasets/drexel_1/s/s_06.txt', 's'), ('datasets/drexel_1/s/s_02.txt', 's'), ('datasets/drexel_1/s/s_07.txt', 's'), ('datasets/drexel_1/s/s_08.txt', 's'), ('datasets/drexel_1/s/s_05.txt', 's'), ('datasets/drexel_1/s/s_03.txt', 's'), ('datasets/drexel_1/s/s_04.txt', 's'), ('datasets/drexel_1/s/s_09.txt', 's'), ('datasets/drexel_1/c/c_03.txt', 'c'), ('datasets/drexel_1/c/c_04.txt', 'c'), ('datasets/drexel_1/c/c_01.txt', 'c'), ('datasets/drexel_1/c/c_09.txt', 'c'), ('datasets/drexel_1/c/c_02.txt', 'c'), ('datasets/drexel_1/c/c_07.txt', 'c'), ('datasets/drexel_1/c/c_06.txt', 'c'), ('datasets/drexel_1/c/c_05.txt', 'c'), ('datasets/drexel_1/c/c_08.txt', 'c')]

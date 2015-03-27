@@ -2,12 +2,13 @@
 """ Tools for feature selection.
 """
 
-from sklearn.ensemble import ExtraTreesClassifier
-from sklearn.svm import LinearSVC
-from sklearn.feature_selection import RFE
-from numpy import sort
-from stylproj.features.featregister import featregistry
 from collections import OrderedDict
+from numpy import sort
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.feature_selection import RFE
+from sklearn.svm import LinearSVC
+from sklearn.cluster imiport KMeans
+from stylproj.features.featregister import featregistry
 
 # TODO: Grid search with k-fold cross-validation on classifier in order to see
 # if better ranking results can be achieved.
@@ -66,3 +67,35 @@ def rank_features_rfe(X, y, featureset):
         feat_importance[func] = ranker.ranking_[index]
 
     return sorted(feat_importance.items(), key=lambda x:x[1])
+
+def ak_means_cluster(X, numAuthors)
+    """Given a set of feature values, cluster them into k groups. If, after
+    convergence, there are less than 3 points in any given cluster, recurse with
+    ak_means_cluster(featureVec, numAuthors - 1).
+    :param X: Values for a given feature across a set of authors.
+    :returns: A trained k-means cluster.
+    """
+    if k < 1:
+        raise ValueError("ak-means initialized with less than 1 cluster.")
+
+    km = KMeans(n_clusters=numAuthors, init='k-means++', n_jobs=-1)
+    km.fit(X)
+
+    # Check number of features found in each cluster. Restart with k - 1 if
+    # there are less than 3 members of any cluster.
+
+    # First, we count the number of members in each cluster:
+    labelTable = {}
+    for label in km.labels_:
+        if label in labelTable:
+            labelTable[label] += 1
+        else:
+            labelTable[label] = 1
+
+    # Now we check if any clusters have less than three members:
+    for label in labelTable.keys():
+        if labelTable[label] < 3:
+            print("Reinitializing k means with ", numAuthors-1, " clusters.")
+            return ak_means_cluster(X, numAuthors-1)
+    
+    return km

@@ -12,6 +12,7 @@ from stylproj.gui.stylproj_frontend import StylProj
 from stylproj.dochandler import DocumentExtractor
 from stylproj.featuresets.basic9 import Basic9Extractor
 from stylproj.feat_select import rank_features_rfe
+from stylproj.adversarial import compute_target_vals
 
 import codecs
 import glob
@@ -115,7 +116,15 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     stylproj.controller.feature_ranks = rank_features_rfe(scaler.transform(X), y, featset)
     print(str(feature_ranks))
 
-    # Tell the frontend we've generated some statistics
+    # Get target values for features.
+    authors = stylproj.controller.numAuthors
+    stylproj.adversarial.compute_target_vals(userDocFeatures,
+                                             X,
+                                             clf,
+                                             featset,
+                                             numAuthors)
+
+    # Tell the frontend we're done computing on the input it gave us.
     window.updateStats()
 
     return (clf, scaler)
@@ -149,8 +158,9 @@ document_to_anonymize_path = ''
 other_user_documents_paths  = []
 
 # Get the paths of documents from a set of random authors.
+numAuthors = 7
 drexel_dataset_path = os.path.join('datasets', 'drexel_1')
-other_author_paths = _get_random_doc_paths(drexel_dataset_path, 7)
+other_author_paths = _get_random_doc_paths(drexel_dataset_path, numAuthors)
 
 # Training data
 document_to_anonymize = ''

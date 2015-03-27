@@ -72,8 +72,9 @@ def ak_means_cluster(X, numAuthors)
     """Given a set of feature values, cluster them into k groups. If, after
     convergence, there are less than 3 points in any given cluster, recurse with
     ak_means_cluster(featureVec, numAuthors - 1).
+
     :param X: Values for a given feature across a set of authors.
-    :returns: A trained k-means cluster.
+    :returns: A tuple containing (a trained k-means cluster, numAuthors)
     """
     if k < 1:
         raise ValueError("ak-means initialized with less than 1 cluster.")
@@ -83,7 +84,6 @@ def ak_means_cluster(X, numAuthors)
 
     # Check number of features found in each cluster. Restart with k - 1 if
     # there are less than 3 members of any cluster.
-
     # First, we count the number of members in each cluster:
     labelTable = {}
     for label in km.labels_:
@@ -91,11 +91,9 @@ def ak_means_cluster(X, numAuthors)
             labelTable[label] += 1
         else:
             labelTable[label] = 1
-
     # Now we check if any clusters have less than three members:
     for label in labelTable.keys():
         if labelTable[label] < 3:
             print("Reinitializing k means with ", numAuthors-1, " clusters.")
             return ak_means_cluster(X, numAuthors-1)
-    
-    return km
+    return (km, numAuthors)

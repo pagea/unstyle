@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'stylproj.ui'
+# Form implementation generated from reading ui file 'stylproj/gui/stylproj.ui'
 #
-# Created: Thu Mar 26 15:45:33 2015
+# Created: Fri Mar 27 15:27:06 2015
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -120,7 +120,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addWidget(self.label_3)
         self.rankTable = QtWidgets.QTableWidget(self.stackedWidgetPage2)
         self.rankTable.setRowCount(9)
-        self.rankTable.setColumnCount(2)
+        self.rankTable.setColumnCount(3)
         self.rankTable.setObjectName("rankTable")
         self.rankTable.horizontalHeader().setSortIndicatorShown(False)
         self.verticalLayout_4.addWidget(self.rankTable)

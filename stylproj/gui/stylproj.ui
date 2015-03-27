@@ -226,7 +226,7 @@ p, li { white-space: pre-wrap; }
            <number>9</number>
           </property>
           <property name="columnCount">
-           <number>2</number>
+           <number>3</number>
           </property>
           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
            <bool>false</bool>
@@ -240,6 +240,7 @@ p, li { white-space: pre-wrap; }
           <row/>
           <row/>
           <row/>
+          <column/>
           <column/>
           <column/>
          </widget>
@@ -269,7 +270,7 @@ p, li { white-space: pre-wrap; }
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap>:/icons/img/x.png</pixmap>
+              <pixmap resource="resources.qrc">:/icons/img/x.png</pixmap>
              </property>
             </widget>
            </item>
@@ -354,8 +355,7 @@ p, li { white-space: pre-wrap; }
   </action>
  </widget>
  <resources>
-  <include location="../../../../stylproj/stylproj/gui/resources.qrc"/>
-  <include location="../../../../.designer/backup/resources.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>

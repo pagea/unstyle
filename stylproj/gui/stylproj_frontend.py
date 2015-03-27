@@ -51,11 +51,11 @@ class StylProj(QMainWindow):
             pass
 
     # Controller messages
-    def updateStats(self):
+    def update_stats(self):
         # Set up rank table dimensions
         self.ui.rankTable.setRowCount(len(stylproj.controller.feature_ranks))
         # Name the headers of the table
-        headers = "Text Features", "Target"
+        headers = "Text Features", "Target", "Initial"
         self.ui.rankTable.setHorizontalHeaderLabels(headers)
         headerObj = self.ui.rankTable.horizontalHeader()
         headerObj.setSectionResizeMode(0, QHeaderView.ResizeToContents)
@@ -77,21 +77,24 @@ class StylProj(QMainWindow):
             else:
                 currItem.setText(feature_ranks[pair[0]])
 
+        # Initialize target and initial columns
         for idx, target in enumerate(stylproj.controller.targets): 
             currItem = self.ui.rankTable.item(idx, 1)
             if currItem is None:
                 currItem = QTableWidgetItem(1)
                 currItem.setText(str(target))
                 self.ui.rankTable.setItem(idx, 1, currItem)
-            else:
-                currItem.setText(str(target))
+                currItem2 = QTableWidgetItem(1)
+                self.ui.rankTable.setItem(idx, 2, currItem2)
 
+        # Populate target and current val columns
         labelsBeforeSorting = stylproj.controller.featlabels
         for idx, label in enumerate(labelsBeforeSorting):
-            for item in range(tableHeight):
+            for idx2, item in enumerate(range(tableHeight)):
                 currItem = self.ui.rankTable.item(item, 0)
                 if label == currItem.text():
-                    print("Found matching label")
                     print(label, " ", currItem.text(), " ", item)
                     currItem = self.ui.rankTable.item(item, 1)
                     currItem.setText(str(stylproj.controller.targets[idx]))
+                    currItem = self.ui.rankTable.item(item, 2)
+                    currItem.setText(str(stylproj.controller.to_anonymize_features[0][idx]))

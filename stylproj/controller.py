@@ -92,6 +92,7 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     docToList = []
     docToList.append(document_to_anonymize)
     userDocFeatures = DocumentExtractor(featset, docToList).docExtract()
+    stylproj.controller.to_anonymize_features = userDocFeatures
     # Features from other documents by the user (excludes documentToAnonymize)
     userOtherFeatures = DocumentExtractor(featset, other_user_docs).docExtract()
     # Features from documents by other authors.
@@ -132,7 +133,7 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
                                                                           )
 
     # Tell the frontend we're done computing on the input it gave us.
-    window.updateStats()
+    window.update_stats()
 
     return (clf, scaler)
 
@@ -162,6 +163,7 @@ def startGUI():
 
 # File paths
 document_to_anonymize_path = ''
+to_anonymize_features = []
 other_user_documents_paths  = []
 
 # Get the paths of documents from a set of random authors.

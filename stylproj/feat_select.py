@@ -7,7 +7,7 @@ from numpy import sort
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.feature_selection import RFE
 from sklearn.svm import LinearSVC
-from sklearn.cluster imiport KMeans
+from sklearn.cluster import KMeans
 from stylproj.features.featregister import featregistry
 
 # TODO: Grid search with k-fold cross-validation on classifier in order to see
@@ -68,7 +68,7 @@ def rank_features_rfe(X, y, featureset):
 
     return sorted(feat_importance.items(), key=lambda x:x[1])
 
-def ak_means_cluster(X, numAuthors)
+def ak_means_cluster(X, numAuthors):
     """Given a set of feature values, cluster them into k groups. If, after
     convergence, there are less than 3 points in any given cluster, recurse with
     ak_means_cluster(featureVec, numAuthors - 1).
@@ -76,7 +76,7 @@ def ak_means_cluster(X, numAuthors)
     :param X: Values for a given feature across a set of authors.
     :returns: A tuple containing (a trained k-means cluster, numAuthors)
     """
-    if k < 1:
+    if numAuthors < 1:
         raise ValueError("ak-means initialized with less than 1 cluster.")
 
     km = KMeans(n_clusters=numAuthors, init='k-means++', n_jobs=-1)

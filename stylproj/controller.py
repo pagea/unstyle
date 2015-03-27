@@ -122,7 +122,7 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
                                              X,
                                              clf,
                                              featset,
-                                             numAuthors)
+                                             numAuthors+1)
 
     # Tell the frontend we're done computing on the input it gave us.
     window.updateStats()

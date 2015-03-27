@@ -91,6 +91,7 @@ def ak_means_cluster(X, numAuthors):
             labelTable[label] += 1
         else:
             labelTable[label] = 1
+
     # Now we check if any clusters have less than three members:
     for label in labelTable.keys():
         if labelTable[label] < 3:

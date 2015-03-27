@@ -60,8 +60,12 @@ class StylProj(QMainWindow):
         headerObj = self.ui.rankTable.horizontalHeader()
         headerObj.setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
-        print("Rank table size: " + str(len(stylproj.controller.feature_ranks)))
-        # Populate rank table
+        tableHeight = (len(stylproj.controller.feature_ranks))
+        # XXX: Sorting should be handled in the table, not in the
+        # rank_features methods. This will allow us to untangle this big ball of
+        # spaghetti code.
+
+        # Fill in the feature column
         for idx, pair in enumerate(stylproj.controller.feature_ranks):
             currItem = self.ui.rankTable.item(idx, 0)
             # If we are setting up the table for the first time, currItem will
@@ -72,3 +76,22 @@ class StylProj(QMainWindow):
                 self.ui.rankTable.setItem(idx, 0, currItem)
             else:
                 currItem.setText(feature_ranks[pair[0]])
+
+        for idx, target in enumerate(stylproj.controller.targets): 
+            currItem = self.ui.rankTable.item(idx, 1)
+            if currItem is None:
+                currItem = QTableWidgetItem(1)
+                currItem.setText(str(target))
+                self.ui.rankTable.setItem(idx, 1, currItem)
+            else:
+                currItem.setText(str(target))
+
+        labelsBeforeSorting = stylproj.controller.featlabels
+        for idx, label in enumerate(labelsBeforeSorting):
+            for item in range(tableHeight):
+                currItem = self.ui.rankTable.item(item, 0)
+                if label == currItem.text():
+                    print("Found matching label")
+                    print(label, " ", currItem.text(), " ", item)
+                    currItem = self.ui.rankTable.item(item, 1)
+                    currItem.setText(str(stylproj.controller.targets[idx]))

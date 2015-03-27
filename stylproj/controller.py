@@ -1,6 +1,5 @@
 """This module is the link between the frontend and the backend of stylproj.
 """
-# FIXME: This module needs a workover; it's messy in here.
 
 from sklearn import svm, preprocessing
 
@@ -24,8 +23,10 @@ import stylproj
 import sys
 import timeit
 
-#Instance of the frontend
+# Instance of the frontend
 window = None
+# Target feature values
+targets = None
 
 # TODO: move to dochandler
 def load_document(docpath):
@@ -83,6 +84,10 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     # Extract features from all documents using the Basic-9 Feature Set.
     featset = Basic9Extractor()
 
+    stylproj.controller.featlabels = []
+    for index, func in enumerate(featset.features):
+        stylproj.controller.featlabels.append(func)
+
     # TODO: Make DocumentExtractor work properly with one document
     docToList = []
     docToList.append(document_to_anonymize)
@@ -118,11 +123,13 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
 
     # Get target values for features.
     authors = stylproj.controller.numAuthors
-    stylproj.adversarial.compute_target_vals(userDocFeatures,
-                                             X,
-                                             clf,
-                                             featset,
-                                             numAuthors+1)
+    stylproj.controller.targets = stylproj.adversarial.compute_target_vals(
+                                                                           userDocFeatures,
+                                                                           X,
+                                                                           clf,
+                                                                           featset,
+                                                                           numAuthors+1
+                                                                          )
 
     # Tell the frontend we're done computing on the input it gave us.
     window.updateStats()
@@ -166,3 +173,4 @@ other_author_paths = _get_random_doc_paths(drexel_dataset_path, numAuthors)
 document_to_anonymize = ''
 trained_classifier = None
 feature_ranks = []
+feat_labels = []

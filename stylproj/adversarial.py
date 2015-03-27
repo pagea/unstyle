@@ -57,7 +57,7 @@ def compute_target_vals(docfeatures, X, classifier, featureSet, numAuthors):
     print("Initial target configuration: ", configuration)
     # Keep generating target clusters until we find one that works.
     while ((classifier.predict(configuration)[0] is 'user')
-    or (authorship_near_random_chance(probability, numAuthors) is False)):
+    or (authorship_below_random_chance(configuration, classifier, numAuthors) is False)):
         configuration = generate_target_cluster(clusterMeansList)
         iterations += 1
         # We have found a configuration that confounds the classifier.
@@ -78,23 +78,23 @@ def generate_target_cluster(clusterMeansList):
     print("Returning target configuration of len: ", len(configuration))
 
     # The configuration is populated with lists of lists of matrix objects of
-    # [[numbers]]. We don't want that. This hack turns the matrices into regular
+    # [[numbers]]. We don't want that. This ugly hack turns the matrices into regular
     # floats.
-    # FIXME: Find root cause of the matrix issue before this ends up on dailywtf
-    # or /r/techsupportgore
+    # FIXME: Find root cause of the matrix issue.
     fixed = []
     for matrix in configuration:
         fixed.append(matrix[0][0].item(0))
-
-    print("Target configuration: ", configuration)
     return fixed
 
-def authorship_below_random_chance(probability, numAuthors):
-    """See if the chance of the user being the author is below random chance.
+def authorship_below_random_chance(X, classifier, numAuthors):
+    """See if the user's document features fool the classifier
     """
     randomChance = 1/numAuthors
-    authorProb = classifier.predict_proba(X, classifier)[0]
-    if authorProb <= randomChance or is_near(authorProb, randomChance):
+    authorProb = classifier.predict_proba(X)
+    print("User probability: ",authorProb[0][0])
+    print("numAuthors: ", numAuthors)
+    print("Highest probability in array: ", np.amax(authorProb))
+    if authorProb[0][0] <= randomChance:
         return True
     else:
         return False
@@ -102,7 +102,7 @@ def authorship_below_random_chance(probability, numAuthors):
 def is_near(num1, num2):
     """Check num1 is within +/- 5 of num2.
     """
-    if abs(num1 - num2) <= numAuthors:
+    if abs(num1 - num2) <= 5:
         return True
     else:
         return False

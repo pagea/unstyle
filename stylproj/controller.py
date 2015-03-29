@@ -166,6 +166,7 @@ def checkAnonymity(text):
     1 if the user is not the most likely author but there is an above random
     chance that he or she IS the author; 2 if the author is anonymous.
     """
+    print(text)
     randomChance = 1/(numAuthors+1)
     # Extract features from the text
     docToList = []
@@ -178,16 +179,17 @@ def checkAnonymity(text):
     probas = trained_classifier[0].predict_proba(trained_classifier[1].transform(extr))[0]
     # Get the probability of the user label
     index = (trained_classifier[0].classes_).tolist().index('user')
-    print("Probabilities:", probas)
     proba = probas[index]
     print("Probability: ", proba)
     print("Random chance: ", randomChance)
     prediction = trained_classifier[0].predict(trained_classifier[1].transform(extr))[0]
     print(trained_classifier[0].predict_proba(trained_classifier[1].transform(extr)))
     print("Current prediction: ", prediction)
+    print("Probabilities:", probas)
+    print("Higheset prob: ", max(probas))
     print("Prediction type: ", type(prediction))
-    
-    if prediction is np.str_('user'):
+ 
+    if np.isclose(probas[index], max(probas)):
         print("Predicted USER")
         return 0
     if proba > randomChance:

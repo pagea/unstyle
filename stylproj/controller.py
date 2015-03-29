@@ -2,7 +2,6 @@
 """
 
 from sklearn import svm, preprocessing
-
 # gui imports
 from PyQt5.QtWidgets import QApplication, QMainWindow, QStyleFactory
 from stylproj.gui.stylproj_frontend import StylProj
@@ -27,6 +26,8 @@ import timeit
 window = None
 # Target feature values
 targets = None
+# Feature set
+featset = None
 
 # TODO: move to dochandler
 def load_document(docpath):
@@ -82,7 +83,7 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     for pair in other_author_paths:
         otherAuthorLabels.append(pair[1])
     # Extract features from all documents using the Basic-9 Feature Set.
-    featset = Basic9Extractor()
+    stylproj.controller.featset = Basic9Extractor()
 
     stylproj.controller.featlabels = []
     for index, func in enumerate(featset.features):
@@ -92,11 +93,14 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     docToList = []
     docToList.append(document_to_anonymize)
     userDocFeatures = DocumentExtractor(featset, docToList).docExtract()
+    print("User doc features: ", userDocFeatures)
     stylproj.controller.to_anonymize_features = userDocFeatures
     # Features from other documents by the user (excludes documentToAnonymize)
     userOtherFeatures = DocumentExtractor(featset, other_user_docs).docExtract()
+    print("User other features: ", userOtherFeatures)
     # Features from documents by other authors.
     otherAuthorFeatures = DocumentExtractor(featset, other_author_docs).docExtract()
+    print("Other author features: ", otherAuthorFeatures)
     # Features from documents by other authors AND the user.
     userAndOtherFeatures = np.vstack((userOtherFeatures, otherAuthorFeatures))
 
@@ -110,13 +114,16 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     y = []
     y.extend(userLabels)
     y.extend(otherAuthorLabels)
+    print("Training labels: ", y)
 
     # Instantiate classifier; train and predict on scaled data.
     scaler = preprocessing.StandardScaler().fit(X)
-    clf = svm.SVC(probability=True, kernel='rbf')
+    clf = svm.SVC(probability=True, kernel='rbf', C=1.0)
     clf.fit(scaler.transform(X), y)
     print("Predicted author of doc: " +
     str(clf.predict(scaler.transform(userDocFeatures))))
+    print("Certainty: ", clf.predict_proba(scaler.transform(userDocFeatures)))
+    print("Classifier internal label rep: ", clf.classes_)
 
     # Get feature ranks
     stylproj.controller.feature_ranks = rank_features_rfe(scaler.transform(X), y, featset)
@@ -134,7 +141,6 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
 
     # Tell the frontend we're done computing on the input it gave us.
     window.update_stats()
-
     return (clf, scaler)
 
 def validateInput():
@@ -150,10 +156,44 @@ def readyToClassify():
     """ The frontend calls this after it has given the controller all of
     the requisite input documents.
     """
-    validateInput()
-    trained_classifier = train_on_docs(document_to_anonymize_path,
+    stylproj.controller.trained_classifier = train_on_docs(document_to_anonymize_path,
                                        other_user_documents_paths,
                                        other_author_paths)
+def checkAnonymity(text):
+    """Check if the user has properly anonymized their document.
+    :param: The current state of the user's document.
+    :returns: 0 if the classifier identifies the user as the most likely author;
+    1 if the user is not the most likely author but there is an above random
+    chance that he or she IS the author; 2 if the author is anonymous.
+    """
+    randomChance = 1/(numAuthors+1)
+    # Extract features from the text
+    docToList = []
+    docToList.append(text)
+    extractor = DocumentExtractor(featset, docToList)
+    extr = extractor.docExtract()
+    print("Current doc features: ", extr)
+    print("Scaled doc features: ", trained_classifier[1].transform(extr))
+    # Get the probabilities for every label
+    probas = trained_classifier[0].predict_proba(trained_classifier[1].transform(extr))[0]
+    # Get the probability of the user label
+    index = (trained_classifier[0].classes_).tolist().index('user')
+    print("Probabilities:", probas)
+    proba = probas[index]
+    print("Probability: ", proba)
+    print("Random chance: ", randomChance)
+    prediction = trained_classifier[0].predict(trained_classifier[1].transform(extr))[0]
+    print(trained_classifier[0].predict_proba(trained_classifier[1].transform(extr)))
+    print("Current prediction: ", prediction)
+    print("Prediction type: ", type(prediction))
+    
+    if prediction is np.str_('user'):
+        print("Predicted USER")
+        return 0
+    if proba > randomChance:
+        return 1
+    else:
+        return 2
 
 def startGUI():
    app = QApplication(sys.argv)

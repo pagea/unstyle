@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="icons">
     <file>img/x.png</file>
+    <file>img/warning.png</file>
     <file>img/check.png</file>
   </qresource>
 </RCC>

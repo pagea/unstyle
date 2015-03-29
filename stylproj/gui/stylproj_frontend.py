@@ -1,6 +1,7 @@
 from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
+from PyQt5 import QtGui
 from stylproj.gui.stylproj_auto import Ui_MainWindow
 import stylproj.controller
 
@@ -16,6 +17,7 @@ class StylProj(QMainWindow):
         self.ui.browseYourDoc.clicked.connect(self.browseYourDoc_clicked)
         self.ui.browseYourDocs.clicked.connect(self.browseYourDocs_clicked)
         self.ui.deleteYourDocs.clicked.connect(self.deleteYourDocs_clicked)
+        self.ui.textEdit.textChanged.connect(self.changedText)
 
     # stackedWidget buttons
     def stackNext_clicked(self):
@@ -35,9 +37,10 @@ class StylProj(QMainWindow):
 
     def browseYourDocs_clicked(self):
         filenames = QFileDialog.getOpenFileNames()
-        for path in filenames[0]:
-            stylproj.controller.other_user_documents_paths.append(path)
-            self.ui.otherdocslist.addItem(path)
+        if filenames is not '':
+            for path in filenames[0]:
+                stylproj.controller.other_user_documents_paths.append(path)
+                self.ui.otherdocslist.addItem(path)
 
     def deleteYourDocs_clicked(self):
         selected = self.ui.otherdocslist.currentItem()
@@ -49,6 +52,34 @@ class StylProj(QMainWindow):
             self.ui.otherdocslist.takeItem(row)
         else:
             pass
+
+    # TODO: Rather than check anonymity every time the user changes the text,
+    # have a separate thread check every 5 or 10 seconds. Otherwise, we're going
+    # to be constantly locking up the interface when we use large featuresets.
+    def changedText(self):
+        """Called whenever the user changes the text editor.
+        """
+        # Make sure we've trained the classifier before trying to do any
+        # predictions.
+        if stylproj.controller.trained_classifier is None:
+            return 0
+
+        anonymity = stylproj.controller.checkAnonymity(self.ui.textEdit.toPlainText())
+        if anonymity is 0:
+            self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/x.png"))
+            self.ui.anonStatus.setText(("It is still possible to identify you as the "
+                                 "author. Continue changing your document."))
+        if anonymity is 1:
+            self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/warning.png"))
+            self.ui.anonStatus.setText(("Although you are not the most likely author,"
+                                 " there is a statistically significant chance"
+                                 " that you wrote the document. Continue"
+                                 " changing your document."))
+        if anonymity is 2:
+            self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/check.png"))
+            self.ui.anonStatus.setText(("Congratulations! It appears that your"
+                                 " document is no longer associated with your"
+                                 " identity."))
 
     # Controller messages
     def update_stats(self):

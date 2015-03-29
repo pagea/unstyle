@@ -48,10 +48,7 @@ def compute_target_vals(docfeatures, X, classifier, featureSet, numAuthors):
             clusterMeans[cluster].append(mean)
         clusterMeansList.append(clusterMeans)
 
-    print("Cluster means list: ", clusterMeansList)
-    print("Len of cluster means list: ", len(clusterMeansList))
     # Find a target cluster that confuses the classifier.
-    print("Computing target cluster...")
     iterations = 0
     configuration = generate_target_cluster(clusterMeansList)
     print("Initial target configuration: ", configuration)
@@ -73,7 +70,6 @@ def generate_target_cluster(clusterMeansList):
     configuration = []
     print("generate_target_clusters on: ", clusterMeansList, " of len ", len(clusterMeansList))
     for feature in clusterMeansList:
-        print("Feature in clusterMeansList: ", feature)
         configuration.append(random.choice(list(feature.values())))
     print("Returning target configuration of len: ", len(configuration))
 
@@ -95,14 +91,6 @@ def authorship_below_random_chance(X, classifier, numAuthors):
     print("numAuthors: ", numAuthors)
     print("Highest probability in array: ", np.amax(authorProb))
     if authorProb[0][0] <= randomChance:
-        return True
-    else:
-        return False
-
-def is_near(num1, num2):
-    """Check num1 is within +/- 5 of num2.
-    """
-    if abs(num1 - num2) <= 5:
         return True
     else:
         return False

@@ -23,15 +23,15 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="0">
         <widget class="QLabel" name="label_5">
          <property name="text">
           <string>Your document:</string>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="1" column="0">
         <widget class="QTextEdit" name="textEdit">
          <property name="enabled">
           <bool>false</bool>
@@ -45,8 +45,8 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_9">
+       <item row="2" column="0">
+        <widget class="QPushButton" name="saveDoc">
          <property name="text">
           <string>Save As...</string>
          </property>
@@ -206,11 +206,11 @@ p, li { white-space: pre-wrap; }
        </layout>
       </widget>
       <widget class="QWidget" name="stackedWidgetPage2">
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Your documents were successfully analyzed. Your top writing style traits (in order of importance) are:</string>
+           <string>Your documents were successfully analyzed. Your top writing style traits (in order of importance) are listed on the left; suggstions on improving your anonymity are on the right.</string>
           </property>
           <property name="textFormat">
            <enum>Qt::AutoText</enum>
@@ -220,42 +220,46 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QTableWidget" name="rankTable">
-          <property name="rowCount">
-           <number>9</number>
-          </property>
-          <property name="columnCount">
-           <number>3</number>
-          </property>
-          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-           <bool>false</bool>
-          </attribute>
-          <row/>
-          <row/>
-          <row/>
-          <row/>
-          <row/>
-          <row/>
-          <row/>
-          <row/>
-          <row/>
-          <column/>
-          <column/>
-          <column/>
-         </widget>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QTableWidget" name="rankTable">
+            <property name="rowCount">
+             <number>9</number>
+            </property>
+            <property name="columnCount">
+             <number>3</number>
+            </property>
+            <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+             <bool>false</bool>
+            </attribute>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <column/>
+            <column/>
+            <column/>
+           </widget>
+          </item>
+         </layout>
         </item>
-        <item>
+        <item row="2" column="0">
          <widget class="QLabel" name="label_7">
           <property name="text">
-           <string>Click on a trait to highlight its occurrences in your document. Right click on highlighted words to receive suggested replacement words, or simply substitute your own. Make changes until told otherwise.</string>
+           <string>Words that threaten your anonymity have been highlighted. Right click on highlighted words to receive suggested replacement words, or simply substitute your own.</string>
           </property>
           <property name="wordWrap">
            <bool>true</bool>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="3" column="0">
          <widget class="QFrame" name="frame_3">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -263,9 +267,9 @@ p, li { white-space: pre-wrap; }
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QLabel" name="label_8">
+          <layout class="QFormLayout" name="formLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="anonIcon">
              <property name="text">
               <string/>
              </property>
@@ -274,21 +278,20 @@ p, li { white-space: pre-wrap; }
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QLabel" name="label_2">
+           <item row="0" column="1">
+            <widget class="QLabel" name="anonStatus">
              <property name="text">
               <string>It is still possible to identify you as the author. Continue changing your document.</string>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
           </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string/>
-          </property>
          </widget>
         </item>
        </layout>

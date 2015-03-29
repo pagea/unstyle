@@ -5,6 +5,7 @@ import nltk
 import collections
 
 from stylproj.features.featregister import register_feat
+from stylproj import adversarial
 from stylproj import langtools
 
 @register_feat

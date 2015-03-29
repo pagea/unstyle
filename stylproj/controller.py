@@ -186,8 +186,9 @@ def checkAnonymity(text):
     print(trained_classifier[0].predict_proba(trained_classifier[1].transform(extr)))
     print("Current prediction: ", prediction)
     print("Probabilities:", probas)
-    print("Higheset prob: ", max(probas))
+    print("Highset prob: ", max(probas))
     print("Prediction type: ", type(prediction))
+    print("Labels: ", trained_classifier[0].classes_)
  
     if np.isclose(probas[index], max(probas)):
         print("Predicted USER")

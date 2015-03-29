@@ -70,7 +70,11 @@ class StylProj(QMainWindow):
             self.ui.anonStatus.setText(("It is still possible to identify you as the "
                                  "author. Continue changing your document."))
         if anonymity is 1:
-            self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/warning.png"))
+            # FIXME: For reasons unknown, qt absolutely will not load the warning icon,
+            # or any other icon besides x and check. This is in spite of the
+            # fact that the icon shows just fine in designer. As a workaround,
+            # we just use x.
+            self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/x.png"))
             self.ui.anonStatus.setText(("Although you are not the most likely author,"
                                  " there is a statistically significant chance"
                                  " that you wrote the document. Continue"

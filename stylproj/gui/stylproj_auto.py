@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'stylproj.ui'
 #
-# Created: Sat Mar 28 19:37:54 2015
+# Created: Sun Mar 29 15:51:53 2015
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!

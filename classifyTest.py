@@ -7,6 +7,7 @@ from sklearn import svm
 from sklearn import preprocessing
 from sklearn import cross_validation
 from sklearn.grid_search import GridSearchCV
+from sklearn.feature_selection import chi2, SelectKBest
 
 import codecs
 import numpy as np
@@ -60,6 +61,10 @@ testvecs = testFeats.docExtract()
 
 #scale our feature vectors to make them suitable for SVM input
 print("Scaling feature vectors...")
+print("Performing feature selection with chi2")
+selection = SelectKBest(chi2, k=9)
+selection.fit(extracted, labels)
+extracted = selection.transform(extracted)
 extracted = preprocessing.scale(extracted)
 #instantiate classifier and train it
 print("Instantiating classifier...")
@@ -68,7 +73,7 @@ print("Fitting dataset to classifier...")
 clf.fit(extracted, labels)
 #do some predictions, again with test vectors scaled
 print("Computing predictions...")
-normalizedpredic = clf.predict(preprocessing.scale(testvecs))
+normalizedpredic = clf.predict(preprocessing.scale(selection.transform(testvecs)))
 
 #compute number of authors
 authorSet = set()
@@ -78,9 +83,10 @@ for label in labels:
 print("Comparing authors:")
 for n in authorSet:
     print(n)
-print(str(clf.score(preprocessing.scale(testvecs), testlabels) * 100) + "% score on this dataset.")
+#print(str(clf.score(preprocessing.scale(testvecs), testlabels) * 100) + "% score on this dataset.")
 
 testvecsscaled = preprocessing.scale(testvecs)
+testvecsscaled = selection.transform(testvecs)
 #Cross-validation
 print("Computing cross validation...")
 cvIterations = 5

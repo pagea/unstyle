@@ -50,19 +50,19 @@ def compute_target_vals(docfeatures, X, classifier, featureSet, numAuthors):
 
     # Find a target cluster that confuses the classifier.
     iterations = 0
-    configuration = generate_target_cluster(clusterMeansList)
+    configuration = generate_ran_target_cluster(clusterMeansList)
     print("Initial target configuration: ", configuration)
     # Keep generating target clusters until we find one that works.
-    while ((classifier.predict(configuration)[0] is 'user')
+    while ((classifier.predict_proba(configuration)[0] is 'user')
     or (authorship_below_random_chance(configuration, classifier, numAuthors) is False)):
-        configuration = generate_target_cluster(clusterMeansList)
+        configuration = generate_ran_target_cluster(clusterMeansList)
         iterations += 1
         # We have found a configuration that confounds the classifier.
         print("Found target cluster in ", iterations, " iterations.")
         return configuration
     return configuration
 
-def generate_target_cluster(clusterMeansList):
+def generate_ran_target_cluster(clusterMeansList):
     # FIXME: Right now, we try random targets from list of potential clusters
     # until we find a working configuration. That's dumb. Implement a less naive
     # search for a target cluster. Trying to "fuzz" the author's most important
@@ -81,6 +81,15 @@ def generate_target_cluster(clusterMeansList):
     for matrix in configuration:
         fixed.append(matrix[0][0].item(0))
     return fixed
+
+def generate_sane_target_cluster(clusterMeansList, docFeatures):
+    """Find the closest possible feature configuration that will fool the
+    classifier.
+    :param clusterMeansList: A list of potential target values.
+    :param docFeatures: The document_to_anonymize's features.
+    :configuration: A non-working 
+    """
+    pass 
 
 def authorship_below_random_chance(X, classifier, numAuthors):
     """See if the user's document features fool the classifier

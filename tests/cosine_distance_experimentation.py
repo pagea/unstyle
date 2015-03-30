@@ -1,5 +1,6 @@
 # coding: utf-8
-
+# Generated from an ipython session. Played with cosine distance. Saved this for
+# future reference when we implement authorship verification.
 from stylproj.styl_math import cosine_distance
 from stylproj.styl_math import cosine_distance
 from stylproj.controller import load_document

@@ -74,7 +74,7 @@ class StylProj(QMainWindow):
             # or any other icon besides x and check. This is in spite of the
             # fact that the icon shows just fine in designer. As a workaround,
             # we just use x.
-            self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/x.png"))
+            self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/w.png"))
             self.ui.anonStatus.setText(("Although you are not the most likely author,"
                                  " there is a statistically significant chance"
                                  " that you wrote the document. Continue"

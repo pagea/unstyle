@@ -210,7 +210,7 @@ p, li { white-space: pre-wrap; }
         <item row="0" column="0">
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Your documents were successfully analyzed. Your top writing style traits (in order of importance) are listed on the left; suggstions on improving your anonymity are on the right.</string>
+           <string>Your documents were successfully analyzed. Your top writing style traits (in order of importance) are listed on the left; suggestions on improving your anonymity are on the right. </string>
           </property>
           <property name="textFormat">
            <enum>Qt::AutoText</enum>
@@ -220,44 +220,8 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QTableWidget" name="rankTable">
-            <property name="rowCount">
-             <number>9</number>
-            </property>
-            <property name="columnCount">
-             <number>3</number>
-            </property>
-            <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-             <bool>false</bool>
-            </attribute>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <column/>
-            <column/>
-            <column/>
-           </widget>
-          </item>
-         </layout>
-        </item>
         <item row="2" column="0">
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>Words that threaten your anonymity have been highlighted. Right click on highlighted words to receive suggested replacement words, or simply substitute your own.</string>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_3"/>
         </item>
         <item row="3" column="0">
          <widget class="QFrame" name="frame_3">
@@ -285,6 +249,66 @@ p, li { white-space: pre-wrap; }
              </property>
              <property name="scaledContents">
               <bool>true</bool>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QFrame" name="frame_5">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QTableWidget" name="rankTable">
+             <property name="selectionMode">
+              <enum>QAbstractItemView::SingleSelection</enum>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
+             <property name="rowCount">
+              <number>9</number>
+             </property>
+             <property name="columnCount">
+              <number>3</number>
+             </property>
+             <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+              <bool>false</bool>
+             </attribute>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <column/>
+             <column/>
+             <column/>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Description:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="featureDescription">
+             <property name="text">
+              <string>Click on a feature to receive a description of the feature.</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>

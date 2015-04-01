@@ -20,6 +20,7 @@ class StylProj(QMainWindow):
         self.ui.deleteYourDocs.clicked.connect(self.deleteYourDocs_clicked)
         self.ui.textEdit.textChanged.connect(self.refreshAnonymity)
         self.ui.rankTable.selectionModel().selectionChanged.connect(self.row_highlighted)
+        self.ui.saveDoc.clicked.connect(self.saveDoc_clicked)
     def getFeatureDesc(self, functionName):
         """Translate feature extractor names into something that the end user
         can understand.
@@ -88,6 +89,16 @@ class StylProj(QMainWindow):
             self.ui.otherdocslist.takeItem(row)
         else:
             pass
+
+    def saveDoc_clicked(self):
+        """Save the current state of the text editor to a file defined by the
+        user.
+        """
+        # Open a save dialog
+        filename = QFileDialog.getSaveFileName()
+        if filename is not None:
+            with open(filename, 'w+') as file:
+                file.write(str(textEdit.toPlainText()))
 
     # TODO: Rather than check anonymity every time the user changes the text,
     # have a separate thread check every 5 or 10 seconds. Otherwise, we're going

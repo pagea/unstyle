@@ -210,7 +210,7 @@ p, li { white-space: pre-wrap; }
         <item row="0" column="0">
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Your documents were successfully analyzed. Your top writing style traits (in order of importance) are listed on the left; suggestions on improving your anonymity are on the right. </string>
+           <string>Your documents were successfully analyzed. Your top writing style traits (in order of importance) are listed on the left. Changing document's feature values (listed in the 'initial') to target values (listed in the 'target') will result in an anonymous document.</string>
           </property>
           <property name="textFormat">
            <enum>Qt::AutoText</enum>

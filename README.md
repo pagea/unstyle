@@ -1,3 +1,10 @@
+## WARNING:
+Unstyle only protects you against certain types of authorship attribution
+methods. Although there are future plans to support the best known method of
+authorship attribution, Unstyle currently uses a much simpler model. As such,
+even though you will be anonymized against our simpler model, a more
+sophisticated model could be used to unmask your identity.
+
 ## About Unstyle
 Unstyle is an application intended to help users publish anonymous writings.
 

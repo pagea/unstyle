@@ -19,8 +19,7 @@ Unstyle is an application intended to help users publish anonymous writings.
 
 ## Contributing
 
-Pull requests are both welcome and encouraged. For an overview of how Unstyle
-works, refer to my thesis. (Thesis will be linked here on April 3rd)
+Pull requests are both welcome and encouraged.
 
 Not sure where to start? We are in the process of migrating our bugtracker from
 Bitbucket. In the meantime, try this in the root directory:

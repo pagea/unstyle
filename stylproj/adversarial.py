@@ -17,7 +17,7 @@ def compute_target_vals(docfeatures, X, classifier, featureSet, numAuthors):
     :param classifier: A classifier trained on X.
     :param featureSet: A feature extractor, such as Basic9Extractor().
     :param numAuthors: The number of authors in X.
-    :returns: A list of target vectors for each feature.
+    :rtype: A list of target vectors for each feature.
     """
     # TODO: Split this function up; it's very monolithic
     # Cluster every feature vector; put them all in a list.

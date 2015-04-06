@@ -74,7 +74,7 @@ def ak_means_cluster(X, numAuthors):
     ak_means_cluster(featureVec, numAuthors - 1).
 
     :param X: Values for a given feature across a set of authors.
-    :returns: A tuple containing (a trained k-means cluster, numAuthors)
+    :rtype: A tuple containing (a trained k-means cluster, numAuthors)
     """
     if numAuthors < 1:
         raise ValueError("ak-means initialized with less than 1 cluster.")

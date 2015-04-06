@@ -46,7 +46,7 @@ def load_document(docpath):
     # for this.
     """Load a document into a string.
     :param docpath: The path of the document to load.
-    :returns: A string.
+    :rtype: A string.
     """
     document = ""
     with codecs.open(docpath, "r", encoding = 'utf8', errors='replace') as docString:
@@ -56,7 +56,7 @@ def load_document(docpath):
 # TODO: move to dochandler
 def _get_random_doc_paths(directory, numAuthors):
     """Get some random documents (and their labels) from our pre-supplied corpus.
-    :returns: A tuple of (document paths, labels)
+    :rtype: A tuple of (document paths, labels)
     """
     paths = []
     labels = []
@@ -75,7 +75,7 @@ def _get_random_doc_paths(directory, numAuthors):
  
 def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     """Load and classify all documents referenced by the given paths.
-    :returns: A classifier trained on the user's documents and a random subset
+    :rtype: A classifier trained on the user's documents and a random subset
     of our corpus.
     """
     document_to_anonymize = load_document(pathToAnonymize)
@@ -197,7 +197,7 @@ def readyToClassify():
 def checkAnonymity(text):
     """Check if the user has properly anonymized their document.
     :param: The current state of the user's document.
-    :returns: 0 if the classifier identifies the user as the most likely author;
+    :rtype: 0 if the classifier identifies the user as the most likely author;
     1 if the user is not the most likely author but there is an above random
     chance that he or she IS the author; 2 if the author is anonymous.
     """

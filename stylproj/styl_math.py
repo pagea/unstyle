@@ -10,7 +10,7 @@ def cosine_distance(m, f):
 
     :param m: A set of averages of every author's feature.
     :param f: The featureset extracted from D.
-    :returns: A distance such that, given cosine_distance(x, y) <
+    :rtype: A distance such that, given cosine_distance(x, y) <
     cosine_distance(x, z), we say that x is "closer to" y than z.
     """
     return (1 - ((m * f).sum()/(norm(m) * norm(f))))

@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>stylproj.features package &mdash; Unstyle a documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Unstyle a documentation" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Unstyle a documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="stylproj-features-package">
+<h1>stylproj.features package<a class="headerlink" href="#stylproj-features-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-stylproj.features.characterfeatures">
+<span id="stylproj-features-characterfeatures-module"></span><h2>stylproj.features.characterfeatures module<a class="headerlink" href="#module-stylproj.features.characterfeatures" title="Permalink to this headline">¶</a></h2>
+<p>Module containing character feature extractors.</p>
+<dl class="function">
+<dt id="stylproj.features.characterfeatures.characterSpace">
+<code class="descclassname">stylproj.features.characterfeatures.</code><code class="descname">characterSpace</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#stylproj.features.characterfeatures.characterSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the total number of characters.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="stylproj.features.characterfeatures.letterSpace">
+<code class="descclassname">stylproj.features.characterfeatures.</code><code class="descname">letterSpace</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#stylproj.features.characterfeatures.letterSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the total number of letters (excludes spaces and punctuation)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-stylproj.features.featregister">
+<span id="stylproj-features-featregister-module"></span><h2>stylproj.features.featregister module<a class="headerlink" href="#module-stylproj.features.featregister" title="Permalink to this headline">¶</a></h2>
+<p>The feature extractor register. This keeps track of all feature extractors.
+We compose feature sets (subsets of stylproj&#8217;s set of all feature extractors) by accessing this dictionary.</p>
+<p>** The feature register should only be used by DocumentHandlers. **</p>
+<p>Note that the featregistry is ordered.</p>
+<p>Use the &#64;register_feat decorator to register a feature extractor with stylproj.</p>
+<dl class="function">
+<dt id="stylproj.features.featregister.register_feat">
+<code class="descclassname">stylproj.features.featregister.</code><code class="descname">register_feat</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#stylproj.features.featregister.register_feat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds decorated function to a dictionary in the form {&#8216;name of
+function&#8217;:function}. For instance, we add the characterSpace feature to our
+registry by adding &#64;register_feat before the definition:</p>
+<p>&#64;register_feat
+def characterSpace(text):</p>
+<blockquote>
+<div>...</div></blockquote>
+<p>Then the state of our dictionary becomes:
+{&#8216;characterSpace&#8217; : &lt;function characterfeatures.characterSpace&gt;}</p>
+<p>This makes it easy to make a featureset composed of whatever functions we
+would like to experiment with.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-stylproj.features.lexicalfeatures">
+<span id="stylproj-features-lexicalfeatures-module"></span><h2>stylproj.features.lexicalfeatures module<a class="headerlink" href="#module-stylproj.features.lexicalfeatures" title="Permalink to this headline">¶</a></h2>
+<p>Module containing lexical feature extractors.</p>
+<dl class="function">
+<dt id="stylproj.features.lexicalfeatures.avgSentenceLength">
+<code class="descclassname">stylproj.features.lexicalfeatures.</code><code class="descname">avgSentenceLength</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#stylproj.features.lexicalfeatures.avgSentenceLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the average length of a sentence.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="stylproj.features.lexicalfeatures.avgSyllablesPerWord">
+<code class="descclassname">stylproj.features.lexicalfeatures.</code><code class="descname">avgSyllablesPerWord</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#stylproj.features.lexicalfeatures.avgSyllablesPerWord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the average number of syllables per word.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="stylproj.features.lexicalfeatures.complexity">
+<code class="descclassname">stylproj.features.lexicalfeatures.</code><code class="descname">complexity</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#stylproj.features.lexicalfeatures.complexity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the ratio of unique words to total number of words in the
+document.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="stylproj.features.lexicalfeatures.fleschReadingEase">
+<code class="descclassname">stylproj.features.lexicalfeatures.</code><code class="descname">fleschReadingEase</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#stylproj.features.lexicalfeatures.fleschReadingEase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the Flesch reading ease score.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="stylproj.features.lexicalfeatures.gunningFog">
+<code class="descclassname">stylproj.features.lexicalfeatures.</code><code class="descname">gunningFog</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#stylproj.features.lexicalfeatures.gunningFog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the Gunning-Fog readability measure.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="stylproj.features.lexicalfeatures.sentenceCount">
+<code class="descclassname">stylproj.features.lexicalfeatures.</code><code class="descname">sentenceCount</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#stylproj.features.lexicalfeatures.sentenceCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of sentences using NLTK&#8217;s sentence tokenizer.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="stylproj.features.lexicalfeatures.unique_words">
+<code class="descclassname">stylproj.features.lexicalfeatures.</code><code class="descname">unique_words</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#stylproj.features.lexicalfeatures.unique_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of unique words.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-stylproj.features">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-stylproj.features" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">stylproj.features package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-stylproj.features.characterfeatures">stylproj.features.characterfeatures module</a></li>
+<li><a class="reference internal" href="#module-stylproj.features.featregister">stylproj.features.featregister module</a></li>
+<li><a class="reference internal" href="#module-stylproj.features.lexicalfeatures">stylproj.features.lexicalfeatures module</a></li>
+<li><a class="reference internal" href="#module-stylproj.features">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/stylproj.features.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Alden S. Page.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.3</a>
+      
+      |
+      <a href="_sources/stylproj.features.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

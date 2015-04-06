@@ -153,7 +153,7 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
 
     # Instantiate classifier; train and predict on scaled data.
     scaler = preprocessing.StandardScaler().fit(X)
-    clf = svm.SVC(probability=True, kernel='rbf', C=1.0)
+    clf = svm.SVC(probability=True, kernel='rbf', C=1.0, class_weight='auto')
     clf.fit(scaler.transform(X), y)
     print("Predicted author of doc: " +
     str(clf.predict(scaler.transform(userDocFeatures))))
@@ -251,7 +251,7 @@ to_anonymize_features = []
 other_user_documents_paths  = []
 
 # Get the paths of documents from a set of random authors.
-numAuthors = 7
+numAuthors = 13
 drexel_dataset_path = os.path.join('datasets', 'drexel_1')
 other_author_paths = _get_random_doc_paths(drexel_dataset_path, numAuthors)
 

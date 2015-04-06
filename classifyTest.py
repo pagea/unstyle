@@ -1,0 +1,111 @@
+#Load, train, and classify documents.
+#This serves as a prototype for experimenting with document classification. This
+#module should NOT be referred to by any other classes.
+from stylproj.dochandler import DocumentExtractor
+from stylproj.featuresets.basic9 import Basic9Extractor
+from sklearn import svm
+from sklearn import preprocessing
+from sklearn import cross_validation
+from sklearn.grid_search import GridSearchCV
+from sklearn.feature_selection import chi2, SelectKBest
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.cross_validation import train_test_split
+
+import codecs
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+#load our list of training document paths (original author)
+labels = []
+paths = []
+with open("trainingDocs.txt", "r") as trainingDocs:
+    for line in trainingDocs.readlines():
+        paths.append(line.split(':')[0])
+        labels.append(line.split(':')[1].replace('\n', ''))
+        #print("Training set with label: " + line)
+
+#load our list of test document paths
+testlabels = []
+testpaths = []
+with open("testDocs.txt", "r") as testDocs:
+    for line in testDocs.readlines():
+        testpaths.append(line.split(':')[0])
+        testlabels.append(line.split(':')[1].replace('\n', ''))
+
+#load each file in our list of paths
+trainingStrings = []
+for path in paths:
+    with codecs.open(path, "r", encoding='utf8',errors='replace') as docString:
+            document = docString.read()
+            trainingStrings.append(document)
+
+#load each of our testfile path list
+testStrings = []
+for path in testpaths:
+    with codecs.open(path, "r", encoding = 'utf8', errors='replace') as docString:
+        document = docString.read()
+        testStrings.append(document)
+
+#extract features from each document
+print("Extracting features...")
+extractedFeats = DocumentExtractor(Basic9Extractor(), trainingStrings)
+extracted = extractedFeats.docExtract()
+
+#extract features from our test documents:
+testFeats = DocumentExtractor(Basic9Extractor(), testStrings)
+testvecs = testFeats.docExtract()
+
+#scale our feature vectors to make them suitable for SVM input
+print("Scaling feature vectors...")
+extracted = preprocessing.scale(extracted)
+#instantiate classifier and train it
+print("Instantiating classifier...")
+clf = svm.SVC(probability=True, kernel='rbf', class_weight='auto')
+print("Fitting dataset to classifier...")
+clf.fit(extracted, labels)
+#do some predictions, again with test vectors scaled
+print("Computing predictions...")
+normalizedpredic = clf.predict(preprocessing.scale(testvecs))
+
+#compute number of authors
+authorSet = set()
+for label in labels:
+    authorSet.add(label)
+
+print("Comparing authors:")
+for n in authorSet:
+    print(n)
+#print(str(clf.score(preprocessing.scale(testvecs), testlabels) * 100) + "% score on this dataset.")
+
+testvecsscaled = preprocessing.scale(testvecs)
+#Cross-validation
+print("Computing cross validation...")
+cvIterations = 3
+scores = cross_validation.cross_val_score(clf, extracted, labels,
+cv=cvIterations)
+print("Accuracy by " + str(cvIterations)  + "-fold CV: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+
+def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.Blues):
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(authorSet))
+    plt.xticks(tick_marks, list(authorSet), rotation=45)
+    plt.yticks(tick_marks, list(authorSet))
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+
+y_pred = clf.predict(testvecsscaled)
+print("Predictions: ",y_pred)
+cm = confusion_matrix(labels, y_pred)
+cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+np.set_printoptions(precision=2)
+plt.figure()
+plot_confusion_matrix(cm)
+print(cm)
+
+report = print(classification_report(labels, y_pred, target_names=[str(x) for x in range(13)]))
+plt.show()

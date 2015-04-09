@@ -5,6 +5,7 @@ import numpy as np
 import random
 import sys
 
+
 def compute_target_vals(docfeatures, X, classifier, featureSet, numAuthors):
     """Given a set of feature vectors and a trained classifier, determine what
     each feature must be changed to change the classifier's label of the set of
@@ -24,12 +25,13 @@ def compute_target_vals(docfeatures, X, classifier, featureSet, numAuthors):
     print("Clustering features...")
     clusterMeansList = []
     for col in range(X.shape[1]):
-        # Get every sample of a given feature; cluster into <= numAuthors groups.
+        # Get every sample of a given feature; cluster into <= numAuthors
+        # groups.
         feature = np.asmatrix(X[:, col]).transpose()
         print("Clustering the following samples:")
         print(feature)
         ak = ak_means_cluster(feature, numAuthors)
-     
+
         # Put all of the clusters from this feature into a table of the form
         # {cluster : members_of_cluster}
         clusters = {k: [] for k in range(ak[1])}
@@ -37,14 +39,14 @@ def compute_target_vals(docfeatures, X, classifier, featureSet, numAuthors):
         for idx, label in enumerate(ak[0].labels_):
             clusters[label].append(feature[idx])
 
-        #Compute the mean of every cluster
+        # Compute the mean of every cluster
         clusterMeans = {k: [] for k in range(ak[1])}
         for cluster in clusters:
             total = 0
             print(clusters[cluster])
             for num in clusters[cluster]:
                 total += num
-            mean = total/len(clusters[cluster])
+            mean = total / len(clusters[cluster])
             clusterMeans[cluster].append(mean)
         clusterMeansList.append(clusterMeans)
 
@@ -54,7 +56,7 @@ def compute_target_vals(docfeatures, X, classifier, featureSet, numAuthors):
     print("Initial target configuration: ", configuration)
     # Keep generating target clusters until we find one that works.
     while ((classifier.predict_proba(configuration)[0] is 'user')
-    or (authorship_below_random_chance(configuration, classifier, numAuthors) is False)):
+           or (authorship_below_random_chance(configuration, classifier, numAuthors) is False)):
         configuration = generate_ran_target_cluster(clusterMeansList)
         iterations += 1
         # We have found a configuration that confounds the classifier.
@@ -62,13 +64,15 @@ def compute_target_vals(docfeatures, X, classifier, featureSet, numAuthors):
         return configuration
     return configuration
 
+
 def generate_ran_target_cluster(clusterMeansList):
     # FIXME: Right now, we try random targets from list of potential clusters
     # until we find a working configuration. That's dumb. Implement a less naive
     # search for a target cluster. Trying to "fuzz" the author's most important
     # features incrementally is likely the best way to go.
     configuration = []
-    print("generate_target_clusters on: ", clusterMeansList, " of len ", len(clusterMeansList))
+    print("generate_target_clusters on: ", clusterMeansList,
+          " of len ", len(clusterMeansList))
     for feature in clusterMeansList:
         configuration.append(random.choice(list(feature.values())))
     print("Returning target configuration of len: ", len(configuration))
@@ -82,6 +86,7 @@ def generate_ran_target_cluster(clusterMeansList):
         fixed.append(matrix[0][0].item(0))
     return fixed
 
+
 def generate_sane_target_cluster(clusterMeansList, docFeatures):
     """Find the closest possible feature configuration that will fool the
     classifier.
@@ -89,14 +94,15 @@ def generate_sane_target_cluster(clusterMeansList, docFeatures):
     :param docFeatures: The document_to_anonymize's features.
     :configuration: A non-working 
     """
-    pass 
+    pass
+
 
 def authorship_below_random_chance(X, classifier, numAuthors):
     """See if the user's document features fool the classifier
     """
-    randomChance = 1/numAuthors
+    randomChance = 1 / numAuthors
     authorProb = classifier.predict_proba(X)
-    print("User probability: ",authorProb[0][0])
+    print("User probability: ", authorProb[0][0])
     print("numAuthors: ", numAuthors)
     print("Highest probability in array: ", np.amax(authorProb))
     if authorProb[0][0] <= randomChance:

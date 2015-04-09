@@ -11,20 +11,21 @@ from nltk.corpus import cmudict
 
 d = cmudict.dict()
 
+
 def tokenize(text):
     """Tokenizes a given block of text. We use this rather than NLTK's
     tokenizers for more control over the tokenization process. See
     /doc/tokenization for details.
     """
-    #1. Replace hyphens and newlines with spaces
+    # 1. Replace hyphens and newlines with spaces
 
     noNewls = text.replace('\n', ' ')
     noHyphens = noNewls.replace('-', ' ')
 
-    #2. Split all words by spaces.
+    # 2. Split all words by spaces.
     noSpaces = noHyphens.split(' ')
 
-    #3. Remove all punctuation.
+    # 3. Remove all punctuation.
     # TODO: Deal with apostrophes better. We don't want to strip them from
     # contractions.
     punctuation = "[\.,!?;,:\"\'()\[\]\{\}–]"
@@ -32,6 +33,7 @@ def tokenize(text):
     for word in noSpaces:
         noPunc.append(re.sub(punctuation, '', word))
     return noPunc
+
 
 def syllableCount(word):
     """Return the ESTIMATED number of syllables in a given word. Returns none if
@@ -48,9 +50,11 @@ def syllableCount(word):
     else:
         return nsyl(word.lower())
 
+
 def nsyl(word):
     """Return the minimum syllable count."""
     # TODO: Near-indecipherable one-liner from stackoverflow; should probably
     # replace this.
-    syllables = [len(list(y for y in x if y[-1].isdigit())) for x in d[word.lower()]]
+    syllables = [len(list(y for y in x if y[-1].isdigit()))
+                 for x in d[word.lower()]]
     return syllables[0]

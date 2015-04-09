@@ -41,6 +41,8 @@ userDocsMeans = None
 similar = True
 
 # TODO: move to dochandler
+
+
 def load_document(docpath):
     # TODO: Support docx and odf. Should be easy; python has internal libraries
     # for this.
@@ -49,11 +51,13 @@ def load_document(docpath):
     :rtype: A string.
     """
     document = ""
-    with codecs.open(docpath, "r", encoding = 'utf8', errors='replace') as docString:
+    with codecs.open(docpath, "r", encoding='utf8', errors='replace') as docString:
         document = docString.read()
     return document
 
 # TODO: move to dochandler
+
+
 def _get_random_doc_paths(directory, numAuthors):
     """Get some random documents (and their labels) from our pre-supplied corpus.
     :rtype: A tuple of (document paths, labels)
@@ -72,7 +76,8 @@ def _get_random_doc_paths(directory, numAuthors):
 
     print(list(zip(paths, labels)))
     return list(zip(paths, labels))
- 
+
+
 def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     """Load and classify all documents referenced by the given paths.
     :rtype: A classifier trained on the user's documents and a random subset
@@ -107,10 +112,12 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     print("User doc features: ", userDocFeatures)
     stylproj.controller.to_anonymize_features = userDocFeatures
     # Features from other documents by the user (excludes documentToAnonymize)
-    userOtherFeatures = DocumentExtractor(featset, other_user_docs).docExtract()
+    userOtherFeatures = DocumentExtractor(
+        featset, other_user_docs).docExtract()
     print("User other features: ", userOtherFeatures)
     # Features from documents by other authors.
-    otherAuthorFeatures = DocumentExtractor(featset, other_author_docs).docExtract()
+    otherAuthorFeatures = DocumentExtractor(
+        featset, other_author_docs).docExtract()
     print("Other author features: ", otherAuthorFeatures)
     # Features from documents by other authors AND the user.
     userAndOtherFeatures = np.vstack((userOtherFeatures, otherAuthorFeatures))
@@ -126,23 +133,26 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     delta_array = np.empty(0)
     for x, y in combinations(userOtherFeatures, 2):
         delta_array = np.hstack((delta_array, distance.cosine(x, y)))
-    
+
     # Compute cosine similarity threshold
     stylproj.controller.t = delta_array.mean() + delta_array.std()
 
     # Set threshold for verifying authorship via cosine similarity.
     stylproj.controller.t = delta_array.mean() + delta_array.std()
     initCosineSim = distance.cosine(np.asmatrix(userOtherFeatures.mean(axis=0)),
-    np.array(userDocFeatures))
-    stylproj.controller.userDocsMeans = np.asmatrix(userOtherFeatures.mean(axis=0))
+                                    np.array(userDocFeatures))
+    stylproj.controller.userDocsMeans = np.asmatrix(
+        userOtherFeatures.mean(axis=0))
     print("Delta array: ", delta_array)
     print("Delta array threshold: ", stylproj.controller.t)
-    print("userOtherFeatures.mean(): ", np.asmatrix(userOtherFeatures.mean(axis=0)))
+    print("userOtherFeatures.mean(): ", np.asmatrix(
+        userOtherFeatures.mean(axis=0)))
     print("np.array(userDocFeatures):", np.array(userDocFeatures))
     print("Initial cosine similarity between doc and means: ", initCosineSim)
     # Basic sanity check to make sure cosine threshold correctly identifies
     # authorship of user's document.
-    print("Cosine similarity below threshold? ", str(initCosineSim < stylproj.controller.t))
+    print("Cosine similarity below threshold? ", str(
+        initCosineSim < stylproj.controller.t))
 
     # Combine documents and labels. This creates the training set.
     X = np.vstack((userOtherFeatures, otherAuthorFeatures))
@@ -156,27 +166,29 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     clf = svm.SVC(probability=True, kernel='rbf', C=1.0, class_weight='auto')
     clf.fit(scaler.transform(X), y)
     print("Predicted author of doc: " +
-    str(clf.predict(scaler.transform(userDocFeatures))))
+          str(clf.predict(scaler.transform(userDocFeatures))))
     print("Certainty: ", clf.predict_proba(scaler.transform(userDocFeatures)))
     print("Classifier internal label rep: ", clf.classes_)
 
     # Get feature ranks
-    stylproj.controller.feature_ranks = rank_features_rfe(scaler.transform(X), y, featset)
+    stylproj.controller.feature_ranks = rank_features_rfe(
+        scaler.transform(X), y, featset)
     print(str(feature_ranks))
 
     # Get target values for features.
     authors = stylproj.controller.numAuthors
     stylproj.controller.targets = stylproj.adversarial.compute_target_vals(
-                                                                           userDocFeatures,
-                                                                           X,
-                                                                           clf,
-                                                                           featset,
-                                                                           numAuthors+1
-                                                                          )
+        userDocFeatures,
+        X,
+        clf,
+        featset,
+        numAuthors + 1
+    )
 
     # Tell the frontend we're done computing on the input it gave us.
     window.update_stats()
     return (clf, scaler)
+
 
 def validateInput():
     # Make sure the user didn't accidentally put document_to_anonymize in the
@@ -187,13 +199,16 @@ def validateInput():
         else:
             return True
 
+
 def readyToClassify():
     """ The frontend calls this after it has given the controller all of
     the requisite input documents.
     """
     stylproj.controller.trained_classifier = train_on_docs(document_to_anonymize_path,
-                                       other_user_documents_paths,
-                                       other_author_paths)
+                                                           other_user_documents_paths,
+                                                           other_author_paths)
+
+
 def checkAnonymity(text):
     """Check if the user has properly anonymized their document.
     :param: The current state of the user's document.
@@ -201,7 +216,7 @@ def checkAnonymity(text):
     1 if the user is not the most likely author but there is an above random
     chance that he or she IS the author; 2 if the author is anonymous.
     """
-    randomChance = 1/(numAuthors+1)
+    randomChance = 1 / (numAuthors + 1)
     # Extract features from the text
     docToList = []
     docToList.append(text)
@@ -210,14 +225,17 @@ def checkAnonymity(text):
     print("Current doc features: ", extr)
     print("Scaled doc features: ", trained_classifier[1].transform(extr))
     # Get the probabilities for every label
-    probas = trained_classifier[0].predict_proba(trained_classifier[1].transform(extr))[0]
+    probas = trained_classifier[0].predict_proba(
+        trained_classifier[1].transform(extr))[0]
     # Get the probability of the user label
     index = (trained_classifier[0].classes_).tolist().index('user')
     proba = probas[index]
-    prediction = trained_classifier[0].predict(trained_classifier[1].transform(extr))[0]
+    prediction = trained_classifier[0].predict(
+        trained_classifier[1].transform(extr))[0]
     print("Probability: ", proba)
     print("Random chance: ", randomChance)
-    print(trained_classifier[0].predict_proba(trained_classifier[1].transform(extr)))
+    print(trained_classifier[0].predict_proba(
+        trained_classifier[1].transform(extr)))
     print("Current prediction: ", prediction)
     print("Probabilities:", probas)
     print("Highset prob: ", max(probas))
@@ -229,9 +247,9 @@ def checkAnonymity(text):
     stylproj.controller.similar = sim < stylproj.controller.t
     print("New cosine similarity: ", stylproj.controller.similar)
     print("New similarity below threshold? ", str(stylproj.controller.similar))
- 
+
     if (np.isclose(probas[index], max(probas)) and
-        (stylproj.controller.similar)):
+            (stylproj.controller.similar)):
         print("Predicted USER")
         return 0
     if (proba > randomChance) and stylproj.controller.similar:
@@ -239,16 +257,17 @@ def checkAnonymity(text):
     else:
         return 2
 
+
 def startGUI():
-   app = QApplication(sys.argv)
-   stylproj.controller.window = StylProj()
-   stylproj.controller.window.show()
-   sys.exit(app.exec_()) 
+    app = QApplication(sys.argv)
+    stylproj.controller.window = StylProj()
+    stylproj.controller.window.show()
+    sys.exit(app.exec_())
 
 # File paths
 document_to_anonymize_path = ''
 to_anonymize_features = []
-other_user_documents_paths  = []
+other_user_documents_paths = []
 
 # Get the paths of documents from a set of random authors.
 numAuthors = 13

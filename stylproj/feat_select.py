@@ -12,6 +12,8 @@ from stylproj.features.featregister import featregistry
 
 # TODO: Grid search with k-fold cross-validation on classifier in order to see
 # if better ranking results can be achieved.
+
+
 def rank_features_dt(X, y, featureset):
     """Rank features by their importance with a decision tree.
 
@@ -37,8 +39,9 @@ def rank_features_dt(X, y, featureset):
 
     print(feat_importance)
 
-    # Sort the dictionary by value and return it. 
-    return sorted(feat_importance.items(), key=lambda x:x[1], reverse=True)
+    # Sort the dictionary by value and return it.
+    return sorted(feat_importance.items(), key=lambda x: x[1], reverse=True)
+
 
 def rank_features_rfe(X, y, featureset):
     """Rank features by their importance using recursive feature elimination.
@@ -66,7 +69,8 @@ def rank_features_rfe(X, y, featureset):
     for index, func in enumerate(featureset.features):
         feat_importance[func] = ranker.ranking_[index]
 
-    return sorted(feat_importance.items(), key=lambda x:x[1])
+    return sorted(feat_importance.items(), key=lambda x: x[1])
+
 
 def ak_means_cluster(X, numAuthors):
     """Given a set of feature values, cluster them into k groups. If, after
@@ -95,6 +99,6 @@ def ak_means_cluster(X, numAuthors):
     # Now we check if any clusters have less than three members:
     for label in labelTable.keys():
         if labelTable[label] < 3:
-            print("Reinitializing k means with ", numAuthors-1, " clusters.")
-            return ak_means_cluster(X, numAuthors-1)
+            print("Reinitializing k means with ", numAuthors - 1, " clusters.")
+            return ak_means_cluster(X, numAuthors - 1)
     return (km, numAuthors)

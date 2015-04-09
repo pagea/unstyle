@@ -2,6 +2,7 @@
 """
 from numpy.linalg import norm
 
+
 def cosine_distance(m, f):
     """Compute the cosine distance between a "model" M from an author's set of
     documents and a featureset F extracted from D (the document to anonymize.)
@@ -13,4 +14,4 @@ def cosine_distance(m, f):
     :rtype: A distance such that, given cosine_distance(x, y) <
     cosine_distance(x, z), we say that x is "closer to" y than z.
     """
-    return (1 - ((m * f).sum()/(norm(m) * norm(f))))
+    return (1 - ((m * f).sum() / (norm(m) * norm(f))))

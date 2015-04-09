@@ -1,10 +1,12 @@
 import numpy as np
 import glob
 import os
-#Import feature extractors:
-#Import classifiers:
+# Import feature extractors:
+# Import classifiers:
+
 
 class DocumentExtractor:
+
     """A class that performs feature extraction on a given set of documents.
 
     :param feat_extractor: An instance of a feature extractor (e.g. the Basic-9
@@ -36,4 +38,4 @@ class DocumentExtractor:
 
         # Convert to a numpy matrix.
         return np.array(np.asmatrix(self.fv))
-        #return self.fv
+        # return self.fv

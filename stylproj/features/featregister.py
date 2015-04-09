@@ -12,18 +12,19 @@ from collections import OrderedDict
 
 featregistry = OrderedDict()
 
+
 def register_feat(func):
     """Adds decorated function to a dictionary in the form {'name of
     function':function}. For instance, we add the characterSpace feature to our
     registry by adding @register_feat before the definition:
-    
+
     @register_feat
     def characterSpace(text):
         ...
 
     Then the state of our dictionary becomes:
     {'characterSpace' : <function characterfeatures.characterSpace>}
-    
+
     This makes it easy to make a featureset composed of whatever functions we
     would like to experiment with.
     """

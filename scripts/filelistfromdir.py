@@ -14,10 +14,10 @@ for directory in sys.argv[2:]:
     for i in os.listdir(directory):
         if i.endswith(".txt"):
             files.append(directory + "/" + i + ":" +
-            os.path.split(os.path.dirname(directory))[1]  + "\n")
+                         os.path.split(os.path.dirname(directory))[1] + "\n")
 
 with open(sys.argv[1], "w") as filelist:
     filelist.writelines(files)
 
-#for path in files:
+# for path in files:
 #    print(repr(path))

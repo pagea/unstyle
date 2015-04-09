@@ -7,6 +7,7 @@ import stylproj.controller
 
 
 class StylProj(QMainWindow):
+
     def __init__(self, parent=None):
         # Initialized the generated interface code.
         super(StylProj, self).__init__(parent)
@@ -19,8 +20,10 @@ class StylProj(QMainWindow):
         self.ui.browseYourDocs.clicked.connect(self.browseYourDocs_clicked)
         self.ui.deleteYourDocs.clicked.connect(self.deleteYourDocs_clicked)
         self.ui.textEdit.textChanged.connect(self.refreshAnonymity)
-        self.ui.rankTable.selectionModel().selectionChanged.connect(self.row_highlighted)
+        self.ui.rankTable.selectionModel().selectionChanged.connect(
+            self.row_highlighted)
         self.ui.saveDoc.clicked.connect(self.saveDoc_clicked)
+
     def getFeatureDesc(self, functionName):
         """Translate feature extractor names into something that the end user
         can understand.
@@ -28,29 +31,29 @@ class StylProj(QMainWindow):
         :returns: A typle containing ("Feature Name", "Description of feature").
         """
         names = {
-            "letterSpace" : ("Letter Space",
+            "letterSpace": ("Letter Space",
                             ("The total number of letters appearing in your "
-                            "document.")),
-            "gunningFog" : ("Gunning-Fog readability",
+                             "document.")),
+            "gunningFog": ("Gunning-Fog readability",
                            ("A function related to "
                             "the ratio of words/sentences and complex word/total words.")),
-            "avgSyllablesPerWord" : ("Average syllables per word",
+            "avgSyllablesPerWord": ("Average syllables per word",
                                     ("The total "
                                      "number of syllables/the total number of words.")),
-            "unique_words" : ("Unique words",
+            "unique_words": ("Unique words",
                              ("The number of words that appear "
                               "only once in your document.")),
-            "sentenceCount" : ("Sentence count",
+            "sentenceCount": ("Sentence count",
                               ("The number of sentences in your document.")),
-            "characterSpace" : ("Character space", ("The total number of "
-            "characters (letters and numbers) appearing in your document.")),
-            "avgSentenceLength" : ("Average sentence length",
+            "characterSpace": ("Character space", ("The total number of "
+                                                   "characters (letters and numbers) appearing in your document.")),
+            "avgSentenceLength": ("Average sentence length",
                                   ("The average "
                                    "length of sentences in your document.")),
-            "complexity" : ("Complexity",
+            "complexity": ("Complexity",
                            ("The ratio of unique words to total"
                             "words in your document.")),
-            "fleschReadingEase" : ("Flesch readability",
+            "fleschReadingEase": ("Flesch readability",
                                   ("A function related to"
                                    " the ratio of words/sentences and syllables/words."))
         }
@@ -67,7 +70,8 @@ class StylProj(QMainWindow):
         filename = QFileDialog.getOpenFileName()
         stylproj.controller.document_to_anonymize_path = filename[0]
         self.ui.yourdoc.setText(filename[0])
-        stylproj.controller.document_to_anonymize = stylproj.controller.load_document(filename[0])
+        stylproj.controller.document_to_anonymize = stylproj.controller.load_document(
+            filename[0])
         # Show the text of the document in the text editor and enable it.
         self.ui.textEdit.setText(stylproj.controller.document_to_anonymize)
         self.ui.textEdit.setEnabled(True)
@@ -85,7 +89,8 @@ class StylProj(QMainWindow):
         # anything
         if selected is not None:
             row = self.ui.otherdocslist.currentRow()
-            stylproj.controller.other_user_documents_paths.remove(selected.text())
+            stylproj.controller.other_user_documents_paths.remove(
+                selected.text())
             self.ui.otherdocslist.takeItem(row)
         else:
             pass
@@ -111,31 +116,33 @@ class StylProj(QMainWindow):
         if stylproj.controller.trained_classifier is None:
             return 0
 
-        anonymity = stylproj.controller.checkAnonymity(self.ui.textEdit.toPlainText())
+        anonymity = stylproj.controller.checkAnonymity(
+            self.ui.textEdit.toPlainText())
         if anonymity is 0:
             self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/x.png"))
             self.ui.anonStatus.setText(("It is still possible to identify you as the "
-                                 "author. Continue changing your document."))
+                                        "author. Continue changing your document."))
         if anonymity is 1:
             self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/w.png"))
             self.ui.anonStatus.setText(("Although you are not the most likely author,"
-                                 " there is a statistically significant chance"
-                                 " that you wrote the document. Continue"
-                                 " changing your document."))
+                                        " there is a statistically significant chance"
+                                        " that you wrote the document. Continue"
+                                        " changing your document."))
         if anonymity is 2:
             self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/check.png"))
             self.ui.anonStatus.setText(("Congratulations! It appears that your"
-                                 " document is no longer associated with your"
-                                 " identity."))
+                                        " document is no longer associated with your"
+                                        " identity."))
 
-    def row_highlighted(self, _ , __):
+    def row_highlighted(self, _, __):
         """Every time someone selects a row from the table, we update our
         description box with the description of the feature.
         """
         selected = self.ui.rankTable.selectionModel().selectedRows()[0].row()
         featureHighlighted = self.featureRows[selected]
         # Display the description of the highlighted feature
-        self.ui.featureDescription.setText(self.getFeatureDesc(featureHighlighted)[1])
+        self.ui.featureDescription.setText(
+            self.getFeatureDesc(featureHighlighted)[1])
 
     # Controller messages
     def update_stats(self):
@@ -163,10 +170,11 @@ class StylProj(QMainWindow):
                 currItem.setText(self.getFeatureDesc(pair[0])[0])
                 self.ui.rankTable.setItem(idx, 0, currItem)
             else:
-                currItem.setText(self.getFeatureDesc(feature_ranks[pair[0]])[0])
+                currItem.setText(
+                    self.getFeatureDesc(feature_ranks[pair[0]])[0])
 
         # Initialize target and initial columns
-        for idx, target in enumerate(stylproj.controller.targets): 
+        for idx, target in enumerate(stylproj.controller.targets):
             currItem = self.ui.rankTable.item(idx, 1)
             if currItem is None:
                 currItem = QTableWidgetItem(1)
@@ -187,4 +195,5 @@ class StylProj(QMainWindow):
                     currItem = self.ui.rankTable.item(item, 1)
                     currItem.setText(str(stylproj.controller.targets[idx]))
                     currItem = self.ui.rankTable.item(item, 2)
-                    currItem.setText(str(stylproj.controller.to_anonymize_features[0][idx]))
+                    currItem.setText(
+                        str(stylproj.controller.to_anonymize_features[0][idx]))

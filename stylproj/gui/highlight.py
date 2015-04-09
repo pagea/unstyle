@@ -1,6 +1,7 @@
 from PyQt5.QtGui import QTextCharFormat, QTextCursor
 from PyQt5.QtCore import Qt
 
+
 def highlight(begin, end, color, qtextedit):
     form = QTextCharFormat()
     form.setBackground(Qt.red)

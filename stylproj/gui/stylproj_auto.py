@@ -9,7 +9,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_MainWindow(object):
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1209, 682)
@@ -83,7 +85,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.otherdocslist = QtWidgets.QListWidget(self.layoutWidget)
-        self.otherdocslist.setDragDropMode(QtWidgets.QAbstractItemView.DragOnly)
+        self.otherdocslist.setDragDropMode(
+            QtWidgets.QAbstractItemView.DragOnly)
         self.otherdocslist.setResizeMode(QtWidgets.QListView.Fixed)
         self.otherdocslist.setLayoutMode(QtWidgets.QListView.SinglePass)
         self.otherdocslist.setObjectName("otherdocslist")
@@ -96,7 +99,8 @@ class Ui_MainWindow(object):
         self.deleteYourDocs = QtWidgets.QPushButton(self.layoutWidget)
         self.deleteYourDocs.setObjectName("deleteYourDocs")
         self.verticalLayout_5.addWidget(self.deleteYourDocs)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(spacerItem)
         self.horizontalLayout.addLayout(self.verticalLayout_5)
         self.gridLayout_4.addWidget(self.splitter, 0, 0, 1, 1)
@@ -131,12 +135,14 @@ class Ui_MainWindow(object):
         self.anonIcon.setText("")
         self.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/x.png"))
         self.anonIcon.setObjectName("anonIcon")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.anonIcon)
+        self.formLayout.setWidget(
+            0, QtWidgets.QFormLayout.LabelRole, self.anonIcon)
         self.anonStatus = QtWidgets.QLabel(self.frame_3)
         self.anonStatus.setScaledContents(True)
         self.anonStatus.setWordWrap(True)
         self.anonStatus.setObjectName("anonStatus")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.anonStatus)
+        self.formLayout.setWidget(
+            0, QtWidgets.QFormLayout.FieldRole, self.anonStatus)
         self.gridLayout_7.addWidget(self.frame_3, 3, 0, 1, 1)
         self.frame_5 = QtWidgets.QFrame(self.stackedWidgetPage2)
         self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -145,8 +151,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame_5)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.rankTable = QtWidgets.QTableWidget(self.frame_5)
-        self.rankTable.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
-        self.rankTable.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.rankTable.setSelectionMode(
+            QtWidgets.QAbstractItemView.SingleSelection)
+        self.rankTable.setSelectionBehavior(
+            QtWidgets.QAbstractItemView.SelectRows)
         self.rankTable.setRowCount(9)
         self.rankTable.setColumnCount(3)
         self.rankTable.setObjectName("rankTable")
@@ -183,8 +191,10 @@ class Ui_MainWindow(object):
         self.actionNew_session.setObjectName("actionNew_session")
         self.actionAbout = QtWidgets.QAction(MainWindow)
         self.actionAbout.setObjectName("actionAbout")
-        self.actionOpen_documentation_in_browser = QtWidgets.QAction(MainWindow)
-        self.actionOpen_documentation_in_browser.setObjectName("actionOpen_documentation_in_browser")
+        self.actionOpen_documentation_in_browser = QtWidgets.QAction(
+            MainWindow)
+        self.actionOpen_documentation_in_browser.setObjectName(
+            "actionOpen_documentation_in_browser")
         self.menuFile.addAction(self.actionNew_session)
         self.menuFile.addAction(self.actionLoad_session)
         self.menuFile.addAction(self.actionSave_session)
@@ -202,29 +212,38 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label_5.setText(_translate("MainWindow", "Your document:"))
         self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic;\">Select a document to anonymize.</span></p></body></html>"))
+                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                         "p, li { white-space: pre-wrap; }\n"
+                                         "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic;\">Select a document to anonymize.</span></p></body></html>"))
         self.saveDoc.setText(_translate("MainWindow", "Save As..."))
         self.label.setText(_translate("MainWindow", "Document to anonymize:"))
-        self.yourdoc.setToolTip(_translate("MainWindow", "Click the \'Browse\' button to the right to select the document you would like to anonymize."))
+        self.yourdoc.setToolTip(_translate(
+            "MainWindow", "Click the \'Browse\' button to the right to select the document you would like to anonymize."))
         self.browseYourDoc.setText(_translate("MainWindow", "Browse"))
-        self.label_6.setText(_translate("MainWindow", "Other documents written by you:"))
-        self.otherdocslist.setToolTip(_translate("MainWindow", "Click the \'browse\' button and select other documents you have written. Hint: Holding the Ctrl button allows you to select multiple documents.<br><br>It is strongly recommended that the combined word count of your documents is at least 6500."))
+        self.label_6.setText(
+            _translate("MainWindow", "Other documents written by you:"))
+        self.otherdocslist.setToolTip(_translate(
+            "MainWindow", "Click the \'browse\' button and select other documents you have written. Hint: Holding the Ctrl button allows you to select multiple documents.<br><br>It is strongly recommended that the combined word count of your documents is at least 6500."))
         self.browseYourDocs.setText(_translate("MainWindow", "Browse"))
         self.deleteYourDocs.setText(_translate("MainWindow", "Delete"))
         self.stackedNext.setText(_translate("MainWindow", "Next"))
-        self.label_3.setText(_translate("MainWindow", "Your documents were successfully analyzed. Your top writing style traits (in order of importance) are listed on the left; suggestions on improving your anonymity are on the right. "))
-        self.anonStatus.setText(_translate("MainWindow", "It is still possible to identify you as the author. Continue changing your document."))
+        self.label_3.setText(_translate(
+            "MainWindow", "Your documents were successfully analyzed. Your top writing style traits (in order of importance) are listed on the left; suggestions on improving your anonymity are on the right. "))
+        self.anonStatus.setText(_translate(
+            "MainWindow", "It is still possible to identify you as the author. Continue changing your document."))
         self.label_2.setText(_translate("MainWindow", "Description:"))
-        self.featureDescription.setText(_translate("MainWindow", "Click on a feature to receive a description of the feature."))
+        self.featureDescription.setText(_translate(
+            "MainWindow", "Click on a feature to receive a description of the feature."))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
-        self.actionSave_session.setText(_translate("MainWindow", "Save session"))
-        self.actionLoad_session.setText(_translate("MainWindow", "Load session"))
+        self.actionSave_session.setText(
+            _translate("MainWindow", "Save session"))
+        self.actionLoad_session.setText(
+            _translate("MainWindow", "Load session"))
         self.actionNew_session.setText(_translate("MainWindow", "New session"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
-        self.actionOpen_documentation_in_browser.setText(_translate("MainWindow", "Open documentation in browser"))
+        self.actionOpen_documentation_in_browser.setText(
+            _translate("MainWindow", "Open documentation in browser"))
 
 import resources_rc

@@ -100,7 +100,10 @@ class Ui_MainWindow(object):
         self.deleteYourDocs.setObjectName("deleteYourDocs")
         self.verticalLayout_5.addWidget(self.deleteYourDocs)
         spacerItem = QtWidgets.QSpacerItem(
-            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+            20,
+            40,
+            QtWidgets.QSizePolicy.Minimum,
+            QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(spacerItem)
         self.horizontalLayout.addLayout(self.verticalLayout_5)
         self.gridLayout_4.addWidget(self.splitter, 0, 0, 1, 1)
@@ -211,30 +214,43 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label_5.setText(_translate("MainWindow", "Your document:"))
-        self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                         "p, li { white-space: pre-wrap; }\n"
-                                         "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic;\">Select a document to anonymize.</span></p></body></html>"))
+        self.textEdit.setHtml(
+            _translate(
+                "MainWindow",
+                "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                "p, li { white-space: pre-wrap; }\n"
+                "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+                "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic;\">Select a document to anonymize.</span></p></body></html>"))
         self.saveDoc.setText(_translate("MainWindow", "Save As..."))
         self.label.setText(_translate("MainWindow", "Document to anonymize:"))
-        self.yourdoc.setToolTip(_translate(
-            "MainWindow", "Click the \'Browse\' button to the right to select the document you would like to anonymize."))
+        self.yourdoc.setToolTip(
+            _translate(
+                "MainWindow",
+                "Click the \'Browse\' button to the right to select the document you would like to anonymize."))
         self.browseYourDoc.setText(_translate("MainWindow", "Browse"))
         self.label_6.setText(
             _translate("MainWindow", "Other documents written by you:"))
-        self.otherdocslist.setToolTip(_translate(
-            "MainWindow", "Click the \'browse\' button and select other documents you have written. Hint: Holding the Ctrl button allows you to select multiple documents.<br><br>It is strongly recommended that the combined word count of your documents is at least 6500."))
+        self.otherdocslist.setToolTip(
+            _translate(
+                "MainWindow",
+                "Click the \'browse\' button and select other documents you have written. Hint: Holding the Ctrl button allows you to select multiple documents.<br><br>It is strongly recommended that the combined word count of your documents is at least 6500."))
         self.browseYourDocs.setText(_translate("MainWindow", "Browse"))
         self.deleteYourDocs.setText(_translate("MainWindow", "Delete"))
         self.stackedNext.setText(_translate("MainWindow", "Next"))
-        self.label_3.setText(_translate(
-            "MainWindow", "Your documents were successfully analyzed. Your top writing style traits (in order of importance) are listed on the left; suggestions on improving your anonymity are on the right. "))
-        self.anonStatus.setText(_translate(
-            "MainWindow", "It is still possible to identify you as the author. Continue changing your document."))
+        self.label_3.setText(
+            _translate(
+                "MainWindow",
+                "Your documents were successfully analyzed. Your top writing style traits (in order of importance) are listed on the left; suggestions on improving your anonymity are on the right. "))
+        self.anonStatus.setText(
+            _translate(
+                "MainWindow",
+                "It is still possible to identify you as the author. Continue changing your document."))
         self.label_2.setText(_translate("MainWindow", "Description:"))
-        self.featureDescription.setText(_translate(
-            "MainWindow", "Click on a feature to receive a description of the feature."))
+        self.featureDescription.setText(
+            _translate(
+                "MainWindow",
+                "Click on a feature to receive a description of the feature."))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
         self.actionSave_session.setText(

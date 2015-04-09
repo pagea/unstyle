@@ -73,7 +73,8 @@ def gunningFog(text):
                 complexWords += 1
     totalWords = len(tokens)
     totalSentences = sentenceCount(text)
-    return 0.4 * ((totalWords / totalSentences) + 100 * (complexWords / totalWords))
+    return 0.4 * \
+        ((totalWords / totalSentences) + 100 * (complexWords / totalWords))
 
 
 @register_feat
@@ -88,5 +89,5 @@ def fleschReadingEase(text):
         if syllablesInWord:
             totalSyllables += langtools.syllableCount(word)
 
-    return (206.835 - ((1.015 * totalWords) / totalSentences) - 84.6 * (totalSyllables /
-                                                                        totalWords))
+    return (206.835 - ((1.015 * totalWords) / totalSentences) -
+            84.6 * (totalSyllables / totalWords))

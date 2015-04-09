@@ -139,8 +139,11 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
 
     # Set threshold for verifying authorship via cosine similarity.
     stylproj.controller.t = delta_array.mean() + delta_array.std()
-    initCosineSim = distance.cosine(np.asmatrix(userOtherFeatures.mean(axis=0)),
-                                    np.array(userDocFeatures))
+    initCosineSim = distance.cosine(
+        np.asmatrix(
+            userOtherFeatures.mean(
+                axis=0)),
+        np.array(userDocFeatures))
     stylproj.controller.userDocsMeans = np.asmatrix(
         userOtherFeatures.mean(axis=0))
     print("Delta array: ", delta_array)
@@ -204,9 +207,10 @@ def readyToClassify():
     """ The frontend calls this after it has given the controller all of
     the requisite input documents.
     """
-    stylproj.controller.trained_classifier = train_on_docs(document_to_anonymize_path,
-                                                           other_user_documents_paths,
-                                                           other_author_paths)
+    stylproj.controller.trained_classifier = train_on_docs(
+        document_to_anonymize_path,
+        other_user_documents_paths,
+        other_author_paths)
 
 
 def checkAnonymity(text):

@@ -17,7 +17,8 @@ d2 = DocumentExtractor(Basic9Extractor(), "Wait a minute, what?")
 d2.docExtract
 d2.docExtract()
 d2 = DocumentExtractor(
-    Basic9Extractor(), ["Wait a minute, what?", "Test argument 2. What's going on?"])
+    Basic9Extractor(), [
+        "Wait a minute, what?", "Test argument 2. What's going on?"])
 d2.docExtract
 d2.docExtract()
 d2 = DocumentExtractor(Basic9Extractor(), ["Wait a minute, what?"])
@@ -30,7 +31,8 @@ d2.docExtract()
 d2.documents
 d.documents
 d = DocumentExtractor(
-    Basic9Extractor(), ["./datasets/C50train/LynneO\'Donnell/116963newsML.txt"])
+    Basic9Extractor(),
+    ["./datasets/C50train/LynneO\'Donnell/116963newsML.txt"])
 d.documents
 lynneDocs = ""
 with open("./datasets/C50train/LynneO'Donnell/133490newsML.txt") as lynne:

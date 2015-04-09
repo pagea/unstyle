@@ -22,8 +22,11 @@ for author1 in os.listdir("./datasets/C50train/"):
         if (first != second) and (author1, author2) not in authorPairs:
             subprocess.call(['python3', './scripts/filelistfromdir.py',
                              'trainingDocs.txt', first + '/', second + '/'])
-            subprocess.call(['python3', './scripts/filelistfromdir.py',
-                             'testDocs.txt', firsttest + '/', secondtest + '/'])
+            subprocess.call(['python3',
+                             './scripts/filelistfromdir.py',
+                             'testDocs.txt',
+                             firsttest + '/',
+                             secondtest + '/'])
             print(first)
             print(second)
             subprocess.call(['python3', 'classifyTest.py'])

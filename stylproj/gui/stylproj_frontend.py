@@ -31,32 +31,41 @@ class StylProj(QMainWindow):
         :returns: A typle containing ("Feature Name", "Description of feature").
         """
         names = {
-            "letterSpace": ("Letter Space",
-                            ("The total number of letters appearing in your "
-                             "document.")),
-            "gunningFog": ("Gunning-Fog readability",
-                           ("A function related to "
-                            "the ratio of words/sentences and complex word/total words.")),
-            "avgSyllablesPerWord": ("Average syllables per word",
-                                    ("The total "
-                                     "number of syllables/the total number of words.")),
-            "unique_words": ("Unique words",
-                             ("The number of words that appear "
-                              "only once in your document.")),
-            "sentenceCount": ("Sentence count",
-                              ("The number of sentences in your document.")),
-            "characterSpace": ("Character space", ("The total number of "
-                                                   "characters (letters and numbers) appearing in your document.")),
-            "avgSentenceLength": ("Average sentence length",
-                                  ("The average "
-                                   "length of sentences in your document.")),
-            "complexity": ("Complexity",
-                           ("The ratio of unique words to total"
-                            "words in your document.")),
-            "fleschReadingEase": ("Flesch readability",
-                                  ("A function related to"
-                                   " the ratio of words/sentences and syllables/words."))
-        }
+            "letterSpace": (
+                "Letter Space",
+                ("The total number of letters appearing in your "
+                 "document.")),
+            "gunningFog": (
+                "Gunning-Fog readability",
+                ("A function related to "
+                 "the ratio of words/sentences and complex word/total words.")),
+            "avgSyllablesPerWord": (
+                "Average syllables per word",
+                ("The total "
+                 "number of syllables/the total number of words.")),
+            "unique_words": (
+                "Unique words",
+                ("The number of words that appear "
+                 "only once in your document.")),
+            "sentenceCount": (
+                "Sentence count",
+                ("The number of sentences in your document.")),
+            "characterSpace": (
+                "Character space",
+                ("The total number of "
+                 "characters (letters and numbers) appearing in your document.")),
+            "avgSentenceLength": (
+                "Average sentence length",
+                ("The average "
+                 "length of sentences in your document.")),
+            "complexity": (
+                "Complexity",
+                ("The ratio of unique words to total"
+                 "words in your document.")),
+            "fleschReadingEase": (
+                "Flesch readability",
+                ("A function related to"
+                 " the ratio of words/sentences and syllables/words."))}
         return names[functionName]
 
     # stackedWidget buttons
@@ -120,19 +129,22 @@ class StylProj(QMainWindow):
             self.ui.textEdit.toPlainText())
         if anonymity is 0:
             self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/x.png"))
-            self.ui.anonStatus.setText(("It is still possible to identify you as the "
-                                        "author. Continue changing your document."))
+            self.ui.anonStatus.setText(
+                ("It is still possible to identify you as the "
+                 "author. Continue changing your document."))
         if anonymity is 1:
             self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/w.png"))
-            self.ui.anonStatus.setText(("Although you are not the most likely author,"
-                                        " there is a statistically significant chance"
-                                        " that you wrote the document. Continue"
-                                        " changing your document."))
+            self.ui.anonStatus.setText(
+                ("Although you are not the most likely author,"
+                 " there is a statistically significant chance"
+                 " that you wrote the document. Continue"
+                 " changing your document."))
         if anonymity is 2:
             self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/check.png"))
-            self.ui.anonStatus.setText(("Congratulations! It appears that your"
-                                        " document is no longer associated with your"
-                                        " identity."))
+            self.ui.anonStatus.setText(
+                ("Congratulations! It appears that your"
+                 " document is no longer associated with your"
+                 " identity."))
 
     def row_highlighted(self, _, __):
         """Every time someone selects a row from the table, we update our

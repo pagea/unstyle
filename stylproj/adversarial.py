@@ -55,8 +55,8 @@ def compute_target_vals(docfeatures, X, classifier, featureSet, numAuthors):
     configuration = generate_ran_target_cluster(clusterMeansList)
     print("Initial target configuration: ", configuration)
     # Keep generating target clusters until we find one that works.
-    while ((classifier.predict_proba(configuration)[0] is 'user')
-           or (authorship_below_random_chance(configuration, classifier, numAuthors) is False)):
+    while ((classifier.predict_proba(configuration)[0] is 'user') or (
+            authorship_below_random_chance(configuration, classifier, numAuthors) is False)):
         configuration = generate_ran_target_cluster(clusterMeansList)
         iterations += 1
         # We have found a configuration that confounds the classifier.
@@ -92,7 +92,7 @@ def generate_sane_target_cluster(clusterMeansList, docFeatures):
     classifier.
     :param clusterMeansList: A list of potential target values.
     :param docFeatures: The document_to_anonymize's features.
-    :configuration: A non-working 
+    :configuration: A non-working
     """
     pass
 

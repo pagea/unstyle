@@ -12,12 +12,24 @@ set in the future, it is not ready at this moment.
 Unstyle is an application intended to help users publish anonymous writings.
 
 ## Running Unstyle
+
+### Debian, Ubuntu, and other .deb based distros:
+If you are using a Debian-based Linux distribution, you can install Unstyle by
+performing the following steps:
+
 1. Clone the repository.
 2. `cd stylproj`
-3. Install dependencies by running `./install-dependencies.sh`. (This script
-   is untested and likely needs some work; please let us know if there are
-   missing dependencies or if this script fails)
+3. Install dependencies by running `./install-dependencies.sh`.
 4. Run `python3 main.py`
+
+Note that `install-dependencies.sh` has only undergone limited testing. Please
+open up an issue if Step 4 fails.
+
+### OSX and Windows
+Unstyle has not been tested on either of these operating systems. Theoretically,
+if you install all required dependencies yourself, it will work, but this has not been
+confirmed. If you have an OSX or Windows machine available and would like to
+help us port Unstyle, please request this feature in the issue tracker.
 
 ## Contributing
 

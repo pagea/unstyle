@@ -2,7 +2,6 @@ python3
 numpy
 nltk
     punkt
-    wordnet
-cmudict
-matplotlib
-sklearn / scipy
+    cmudict
+matplotlib (OPTIONAL)
+sklearn

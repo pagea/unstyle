@@ -1,9 +1,6 @@
 # Miscellaneous natural language programming functions.
-# TODO: it's kind of stupid to have curses be a dependency just because of one
-# function
 
 import numpy as np
-
 import re
 
 from curses.ascii import isdigit

@@ -13,9 +13,11 @@ Unstyle is an application intended to help users publish anonymous writings.
 
 ## Running Unstyle
 1. Clone the repository.
-3. Install dependencies listed in `DEPENDENCIES`. In the near future, this will
-   be done by a setup script.
-2. Run `python3 main.py`
+2. `cd stylproj`
+3. Install dependencies by running `./install-dependencies.sh`. (This script
+   is untested and likely needs some work; please let us know if there are
+   missing dependencies or if this script fails)
+4. Run `python3 main.py`
 
 ## Contributing
 

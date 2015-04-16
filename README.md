@@ -24,4 +24,4 @@ Pull requests are both welcome and encouraged.
 Not sure where to start? We are in the process of migrating our bugtracker from
 Bitbucket. In the meantime, try this in the root directory:
 
-`grep -nr "TODO\|FIXME\|XXX" . | less`
+`grep -nr "TODO\|FIXME\|XXX" .`

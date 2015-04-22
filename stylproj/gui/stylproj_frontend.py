@@ -2,7 +2,7 @@ from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
 from PyQt5 import QtGui
-from stylproj.gui.stylproj_auto import Ui_MainWindow
+from stylproj.gui.stylproj_auto import Ui_Unstyle
 import stylproj.controller
 
 
@@ -11,9 +11,10 @@ class StylProj(QMainWindow):
     def __init__(self, parent=None):
         # Initialized the generated interface code.
         super(StylProj, self).__init__(parent)
-        self.ui = Ui_MainWindow()
+        self.ui = Ui_Unstyle()
         self.ui.setupUi(self)
         self.featureRows = {}
+        self.setWindowTitle("Unstyle")
         # Signal connections
         self.ui.stackedNext.clicked.connect(self.stackNext_clicked)
         self.ui.browseYourDoc.clicked.connect(self.browseYourDoc_clicked)

@@ -11,6 +11,8 @@ set in the future, it is not ready at this moment.
 ## About Unstyle
 Unstyle is an application intended to help users publish anonymous writings.
 
+For information on how Unstyle works, see doc/thesis.pdf.
+
 ## Running Unstyle
 
 ### Debian, Ubuntu, and other .deb based distros:

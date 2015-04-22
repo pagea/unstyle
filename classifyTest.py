@@ -62,7 +62,7 @@ print("Scaling feature vectors...")
 extracted = preprocessing.scale(extracted)
 # instantiate classifier and train it
 print("Instantiating classifier...")
-clf = svm.SVC(probability=True, kernel='rbf', class_weight='auto')
+clf = svm.SVC(probability=True, kernel='linear', class_weight='auto')
 print("Fitting dataset to classifier...")
 clf.fit(extracted, labels)
 # do some predictions, again with test vectors scaled
@@ -82,7 +82,7 @@ for n in authorSet:
 testvecsscaled = preprocessing.scale(testvecs)
 # Cross-validation
 print("Computing cross validation...")
-cvIterations = 3
+cvIterations = 7
 scores = cross_validation.cross_val_score(clf, extracted, labels,
                                           cv=cvIterations)
 print("Accuracy by " + str(cvIterations) + "-fold CV: %0.2f (+/- %0.2f)" %

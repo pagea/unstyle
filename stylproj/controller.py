@@ -166,7 +166,7 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
 
     # Instantiate classifier; train and predict on scaled data.
     scaler = preprocessing.StandardScaler().fit(X)
-    clf = svm.SVC(probability=True, kernel='rbf', C=1.0, class_weight='auto')
+    clf = svm.SVC(probability=True, kernel='linear', C=1.0, class_weight='auto')
     clf.fit(scaler.transform(X), y)
     print("Predicted author of doc: " +
           str(clf.predict(scaler.transform(userDocFeatures))))

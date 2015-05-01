@@ -11,7 +11,7 @@ set in the future, it is not ready at this moment.
 ## About Unstyle
 Unstyle is an application intended to help users publish anonymous writings.
 
-For information on how Unstyle works, see (doc/thesis.pdf)[https://github.com/pagea/unstyle/blob/master/doc/thesis.pdf].
+For information on how Unstyle works, see [https://github.com/pagea/unstyle/blob/master/doc/thesis.pdf](doc/thesis.pdf).
 
 ## Running Unstyle
 

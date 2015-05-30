@@ -1,29 +1,29 @@
-stylproj.features package
+unstyle.features package
 =========================
 
 Submodules
 ----------
 
-stylproj.features.characterfeatures module
+unstyle.features.characterfeatures module
 ------------------------------------------
 
-.. automodule:: stylproj.features.characterfeatures
+.. automodule:: unstyle.features.characterfeatures
     :members:
     :undoc-members:
     :show-inheritance:
 
-stylproj.features.featregister module
+unstyle.features.featregister module
 -------------------------------------
 
-.. automodule:: stylproj.features.featregister
+.. automodule:: unstyle.features.featregister
     :members:
     :undoc-members:
     :show-inheritance:
 
-stylproj.features.lexicalfeatures module
+unstyle.features.lexicalfeatures module
 ----------------------------------------
 
-.. automodule:: stylproj.features.lexicalfeatures
+.. automodule:: unstyle.features.lexicalfeatures
     :members:
     :undoc-members:
     :show-inheritance:
@@ -32,7 +32,7 @@ stylproj.features.lexicalfeatures module
 Module contents
 ---------------
 
-.. automodule:: stylproj.features
+.. automodule:: unstyle.features
     :members:
     :undoc-members:
     :show-inheritance:

@@ -2,9 +2,9 @@
 # coding: utf-8
 
 get_ipython().magic('ls ')
-from stylproj.dochandler import DocumentExtractor
-from stylproj.featuresets import basic9
-from stylproj.featuresets.basic9 import Basic9Extractor
+from unstyle.dochandler import DocumentExtractor
+from unstyle.featuresets import basic9
+from unstyle.featuresets.basic9 import Basic9Extractor
 d = DocumentExtractor(
     Basic9Extractor(), "./datasets/C50train/LynneO\'Donnell/116963newsML.txt")
 d.documents

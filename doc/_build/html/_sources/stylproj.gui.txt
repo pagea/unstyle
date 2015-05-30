@@ -1,29 +1,29 @@
-stylproj.gui package
+unstyle.gui package
 ====================
 
 Submodules
 ----------
 
-stylproj.gui.highlight module
+unstyle.gui.highlight module
 -----------------------------
 
-.. automodule:: stylproj.gui.highlight
+.. automodule:: unstyle.gui.highlight
     :members:
     :undoc-members:
     :show-inheritance:
 
-stylproj.gui.stylproj_auto module
+unstyle.gui.unstyle_auto module
 ---------------------------------
 
-.. automodule:: stylproj.gui.stylproj_auto
+.. automodule:: unstyle.gui.unstyle_auto
     :members:
     :undoc-members:
     :show-inheritance:
 
-stylproj.gui.stylproj_frontend module
+unstyle.gui.unstyle_frontend module
 -------------------------------------
 
-.. automodule:: stylproj.gui.stylproj_frontend
+.. automodule:: unstyle.gui.unstyle_frontend
     :members:
     :undoc-members:
     :show-inheritance:
@@ -32,7 +32,7 @@ stylproj.gui.stylproj_frontend module
 Module contents
 ---------------
 
-.. automodule:: stylproj.gui
+.. automodule:: unstyle.gui
     :members:
     :undoc-members:
     :show-inheritance:

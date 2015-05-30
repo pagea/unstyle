@@ -15,7 +15,7 @@ class DocumentExtractor:
     :param docs: An arbitrary number of documents (strings of text).
 
     Example:
-    >>>from stylproj.featuresets.basic9 import Basic9Extractor
+    >>>from unstyle.featuresets.basic9 import Basic9Extractor
     >>>d = DocumentExtractor(Basic9Extractor(), ["text of document 1", "text of
     document 2"])
     >>>d.docExtract()

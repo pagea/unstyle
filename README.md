@@ -20,7 +20,7 @@ If you are using a Debian-based Linux distribution, you can install Unstyle by
 performing the following steps:
 
 1. Clone the repository.
-2. `cd stylproj`
+2. `cd unstyle`
 3. Install dependencies by running `./install-dependencies.sh`.
 4. Run `python3 main.py`
 

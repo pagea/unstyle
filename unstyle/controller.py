@@ -1,4 +1,4 @@
-"""This module is the link between the frontend and the backend of stylproj.
+"""This module is the link between the frontend and the backend of unstyle.
 """
 
 from sklearn import svm, preprocessing
@@ -6,13 +6,13 @@ from scipy.spatial import distance
 from itertools import combinations
 # gui imports
 from PyQt5.QtWidgets import QApplication, QMainWindow, QStyleFactory
-from stylproj.gui.stylproj_frontend import StylProj
+from unstyle.gui.unstyle_frontend import Unstyle
 
 # backend imports
-from stylproj.dochandler import DocumentExtractor
-from stylproj.featuresets.basic9 import Basic9Extractor
-from stylproj.feat_select import rank_features_rfe
-from stylproj.adversarial import compute_target_vals
+from unstyle.dochandler import DocumentExtractor
+from unstyle.featuresets.basic9 import Basic9Extractor
+from unstyle.feat_select import rank_features_rfe
+from unstyle.adversarial import compute_target_vals
 
 import codecs
 import glob
@@ -20,7 +20,7 @@ import logging
 import numpy as np
 import os
 import random
-import stylproj
+import unstyle
 import sys
 import timeit
 
@@ -99,18 +99,18 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     for pair in other_author_paths:
         otherAuthorLabels.append(pair[1])
     # Extract features from all documents using the Basic-9 Feature Set.
-    stylproj.controller.featset = Basic9Extractor()
+    unstyle.controller.featset = Basic9Extractor()
 
-    stylproj.controller.featlabels = []
+    unstyle.controller.featlabels = []
     for index, func in enumerate(featset.features):
-        stylproj.controller.featlabels.append(func)
+        unstyle.controller.featlabels.append(func)
 
     # TODO: Make DocumentExtractor work properly with one document
     docToList = []
     docToList.append(document_to_anonymize)
     userDocFeatures = DocumentExtractor(featset, docToList).docExtract()
     print("User doc features: ", userDocFeatures)
-    stylproj.controller.to_anonymize_features = userDocFeatures
+    unstyle.controller.to_anonymize_features = userDocFeatures
     # Features from other documents by the user (excludes documentToAnonymize)
     userOtherFeatures = DocumentExtractor(
         featset, other_user_docs).docExtract()
@@ -135,19 +135,19 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
         delta_array = np.hstack((delta_array, distance.cosine(x, y)))
 
     # Compute cosine similarity threshold
-    stylproj.controller.t = delta_array.mean() + delta_array.std()
+    unstyle.controller.t = delta_array.mean() + delta_array.std()
 
     # Set threshold for verifying authorship via cosine similarity.
-    stylproj.controller.t = delta_array.mean() + delta_array.std()
+    unstyle.controller.t = delta_array.mean() + delta_array.std()
     initCosineSim = distance.cosine(
         np.asmatrix(
             userOtherFeatures.mean(
                 axis=0)),
         np.array(userDocFeatures))
-    stylproj.controller.userDocsMeans = np.asmatrix(
+    unstyle.controller.userDocsMeans = np.asmatrix(
         userOtherFeatures.mean(axis=0))
     print("Delta array: ", delta_array)
-    print("Delta array threshold: ", stylproj.controller.t)
+    print("Delta array threshold: ", unstyle.controller.t)
     print("userOtherFeatures.mean(): ", np.asmatrix(
         userOtherFeatures.mean(axis=0)))
     print("np.array(userDocFeatures):", np.array(userDocFeatures))
@@ -155,7 +155,7 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     # Basic sanity check to make sure cosine threshold correctly identifies
     # authorship of user's document.
     print("Cosine similarity below threshold? ", str(
-        initCosineSim < stylproj.controller.t))
+        initCosineSim < unstyle.controller.t))
 
     # Combine documents and labels. This creates the training set.
     X = np.vstack((userOtherFeatures, otherAuthorFeatures))
@@ -174,13 +174,13 @@ def train_on_docs(pathToAnonymize, otherUserDocPaths, otherAuthorDocPaths):
     print("Classifier internal label rep: ", clf.classes_)
 
     # Get feature ranks
-    stylproj.controller.feature_ranks = rank_features_rfe(
+    unstyle.controller.feature_ranks = rank_features_rfe(
         scaler.transform(X), y, featset)
     print(str(feature_ranks))
 
     # Get target values for features.
-    authors = stylproj.controller.numAuthors
-    stylproj.controller.targets = stylproj.adversarial.compute_target_vals(
+    authors = unstyle.controller.numAuthors
+    unstyle.controller.targets = unstyle.adversarial.compute_target_vals(
         userDocFeatures,
         X,
         clf,
@@ -207,7 +207,7 @@ def readyToClassify():
     """ The frontend calls this after it has given the controller all of
     the requisite input documents.
     """
-    stylproj.controller.trained_classifier = train_on_docs(
+    unstyle.controller.trained_classifier = train_on_docs(
         document_to_anonymize_path,
         other_user_documents_paths,
         other_author_paths)
@@ -247,16 +247,16 @@ def checkAnonymity(text):
     print("Labels: ", trained_classifier[0].classes_)
 
     # Compute updated cosine similarity
-    sim = distance.cosine(stylproj.controller.userDocsMeans, extr)
-    stylproj.controller.similar = sim < stylproj.controller.t
-    print("New cosine similarity: ", stylproj.controller.similar)
-    print("New similarity below threshold? ", str(stylproj.controller.similar))
+    sim = distance.cosine(unstyle.controller.userDocsMeans, extr)
+    unstyle.controller.similar = sim < unstyle.controller.t
+    print("New cosine similarity: ", unstyle.controller.similar)
+    print("New similarity below threshold? ", str(unstyle.controller.similar))
 
     if (np.isclose(probas[index], max(probas)) and
-            (stylproj.controller.similar)):
+            (unstyle.controller.similar)):
         print("Predicted USER")
         return 0
-    if (proba > randomChance) and stylproj.controller.similar:
+    if (proba > randomChance) and unstyle.controller.similar:
         return 1
     else:
         return 2
@@ -264,8 +264,8 @@ def checkAnonymity(text):
 
 def startGUI():
     app = QApplication(sys.argv)
-    stylproj.controller.window = StylProj()
-    stylproj.controller.window.show()
+    unstyle.controller.window = Unstyle()
+    unstyle.controller.window.show()
     sys.exit(app.exec_())
 
 # File paths

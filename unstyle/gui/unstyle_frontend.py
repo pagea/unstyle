@@ -2,15 +2,15 @@ from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
 from PyQt5 import QtGui
-from stylproj.gui.stylproj_auto import Ui_Unstyle
-import stylproj.controller
+from unstyle.gui.unstyle_auto import Ui_Unstyle
+import unstyle.controller
 
 
-class StylProj(QMainWindow):
+class Unstyle(QMainWindow):
 
     def __init__(self, parent=None):
         # Initialized the generated interface code.
-        super(StylProj, self).__init__(parent)
+        super(Unstyle, self).__init__(parent)
         self.ui = Ui_Unstyle()
         self.ui.setupUi(self)
         self.featureRows = {}
@@ -74,23 +74,23 @@ class StylProj(QMainWindow):
         # Go to the next screen.
         self.ui.stackedWidget.setCurrentIndex(1)
         # Tell the controller to train its classifier.
-        stylproj.controller.readyToClassify()
+        unstyle.controller.readyToClassify()
 
     def browseYourDoc_clicked(self):
         filename = QFileDialog.getOpenFileName()
-        stylproj.controller.document_to_anonymize_path = filename[0]
+        unstyle.controller.document_to_anonymize_path = filename[0]
         self.ui.yourdoc.setText(filename[0])
-        stylproj.controller.document_to_anonymize = stylproj.controller.load_document(
+        unstyle.controller.document_to_anonymize = unstyle.controller.load_document(
             filename[0])
         # Show the text of the document in the text editor and enable it.
-        self.ui.textEdit.setText(stylproj.controller.document_to_anonymize)
+        self.ui.textEdit.setText(unstyle.controller.document_to_anonymize)
         self.ui.textEdit.setEnabled(True)
 
     def browseYourDocs_clicked(self):
         filenames = QFileDialog.getOpenFileNames()
         if filenames is not '':
             for path in filenames[0]:
-                stylproj.controller.other_user_documents_paths.append(path)
+                unstyle.controller.other_user_documents_paths.append(path)
                 self.ui.otherdocslist.addItem(path)
 
     def deleteYourDocs_clicked(self):
@@ -99,7 +99,7 @@ class StylProj(QMainWindow):
         # anything
         if selected is not None:
             row = self.ui.otherdocslist.currentRow()
-            stylproj.controller.other_user_documents_paths.remove(
+            unstyle.controller.other_user_documents_paths.remove(
                 selected.text())
             self.ui.otherdocslist.takeItem(row)
         else:
@@ -123,10 +123,10 @@ class StylProj(QMainWindow):
         """
         # Make sure we've trained the classifier before trying to do any
         # predictions.
-        if stylproj.controller.trained_classifier is None:
+        if unstyle.controller.trained_classifier is None:
             return 0
 
-        anonymity = stylproj.controller.checkAnonymity(
+        anonymity = unstyle.controller.checkAnonymity(
             self.ui.textEdit.toPlainText())
         if anonymity is 0:
             self.ui.anonIcon.setPixmap(QtGui.QPixmap(":/icons/img/x.png"))
@@ -161,20 +161,20 @@ class StylProj(QMainWindow):
     def update_stats(self):
         self.refreshAnonymity()
         # Set up rank table dimensions
-        self.ui.rankTable.setRowCount(len(stylproj.controller.feature_ranks))
+        self.ui.rankTable.setRowCount(len(unstyle.controller.feature_ranks))
         # Name the headers of the table
         headers = "Text Features", "Target", "Initial"
         self.ui.rankTable.setHorizontalHeaderLabels(headers)
         headerObj = self.ui.rankTable.horizontalHeader()
         headerObj.setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
-        tableHeight = (len(stylproj.controller.feature_ranks))
+        tableHeight = (len(unstyle.controller.feature_ranks))
         # XXX: Sorting should be handled in the table, not in the
         # rank_features methods. This will allow us to fix this embarrassingly
         # overcomplicated code.
 
         # Fill in the feature column
-        for idx, pair in enumerate(stylproj.controller.feature_ranks):
+        for idx, pair in enumerate(unstyle.controller.feature_ranks):
             currItem = self.ui.rankTable.item(idx, 0)
             # If we are setting up the table for the first time, currItem will
             # not exist.
@@ -187,7 +187,7 @@ class StylProj(QMainWindow):
                     self.getFeatureDesc(feature_ranks[pair[0]])[0])
 
         # Initialize target and initial columns
-        for idx, target in enumerate(stylproj.controller.targets):
+        for idx, target in enumerate(unstyle.controller.targets):
             currItem = self.ui.rankTable.item(idx, 1)
             if currItem is None:
                 currItem = QTableWidgetItem(1)
@@ -198,7 +198,7 @@ class StylProj(QMainWindow):
 
         # Populate target and current val columns
         # Track feature table locations
-        labelsBeforeSorting = stylproj.controller.featlabels
+        labelsBeforeSorting = unstyle.controller.featlabels
         for idx, label in enumerate(labelsBeforeSorting):
             for idx2, item in enumerate(range(tableHeight)):
                 currItem = self.ui.rankTable.item(item, 0)
@@ -206,7 +206,7 @@ class StylProj(QMainWindow):
                     self.featureRows[idx2] = label
                     print(label, " ", currItem.text(), " ", item)
                     currItem = self.ui.rankTable.item(item, 1)
-                    currItem.setText(str(stylproj.controller.targets[idx]))
+                    currItem.setText(str(unstyle.controller.targets[idx]))
                     currItem = self.ui.rankTable.item(item, 2)
                     currItem.setText(
-                        str(stylproj.controller.to_anonymize_features[0][idx]))
+                        str(unstyle.controller.to_anonymize_features[0][idx]))

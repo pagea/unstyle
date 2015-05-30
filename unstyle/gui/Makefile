@@ -1,5 +1,5 @@
 # Files that we want to build
-UI = stylproj.ui
+UI = unstyle.ui
 RESOURCES = resources.qrc
 
 # Buildtools

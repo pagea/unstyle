@@ -1,7 +1,7 @@
 """Module containing character feature extractors."""
 
 import string
-from stylproj.features.featregister import register_feat
+from unstyle.features.featregister import register_feat
 
 
 @register_feat

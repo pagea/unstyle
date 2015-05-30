@@ -1,4 +1,4 @@
-stylproj package
+unstyle package
 ================
 
 Subpackages
@@ -6,57 +6,57 @@ Subpackages
 
 .. toctree::
 
-    stylproj.features
-    stylproj.featuresets
-    stylproj.gui
+    unstyle.features
+    unstyle.featuresets
+    unstyle.gui
 
 Submodules
 ----------
 
-stylproj.adversarial module
+unstyle.adversarial module
 ---------------------------
 
-.. automodule:: stylproj.adversarial
+.. automodule:: unstyle.adversarial
     :members:
     :undoc-members:
     :show-inheritance:
 
-stylproj.controller module
+unstyle.controller module
 --------------------------
 
-.. automodule:: stylproj.controller
+.. automodule:: unstyle.controller
     :members:
     :undoc-members:
     :show-inheritance:
 
-stylproj.dochandler module
+unstyle.dochandler module
 --------------------------
 
-.. automodule:: stylproj.dochandler
+.. automodule:: unstyle.dochandler
     :members:
     :undoc-members:
     :show-inheritance:
 
-stylproj.feat_select module
+unstyle.feat_select module
 ---------------------------
 
-.. automodule:: stylproj.feat_select
+.. automodule:: unstyle.feat_select
     :members:
     :undoc-members:
     :show-inheritance:
 
-stylproj.langtools module
+unstyle.langtools module
 -------------------------
 
-.. automodule:: stylproj.langtools
+.. automodule:: unstyle.langtools
     :members:
     :undoc-members:
     :show-inheritance:
 
-stylproj.styl_math module
+unstyle.styl_math module
 -------------------------
 
-.. automodule:: stylproj.styl_math
+.. automodule:: unstyle.styl_math
     :members:
     :undoc-members:
     :show-inheritance:
@@ -65,7 +65,7 @@ stylproj.styl_math module
 Module contents
 ---------------
 
-.. automodule:: stylproj
+.. automodule:: unstyle
     :members:
     :undoc-members:
     :show-inheritance:

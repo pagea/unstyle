@@ -4,9 +4,9 @@ import numpy
 import nltk
 import collections
 
-from stylproj.features.featregister import register_feat
-from stylproj import adversarial
-from stylproj import langtools
+from unstyle.features.featregister import register_feat
+from unstyle import adversarial
+from unstyle import langtools
 
 
 @register_feat

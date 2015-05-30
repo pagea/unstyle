@@ -1,7 +1,7 @@
-stylproj
+unstyle
 ========
 
 .. toctree::
    :maxdepth: 4
 
-   stylproj
+   unstyle

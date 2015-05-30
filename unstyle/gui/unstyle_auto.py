@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'stylproj.ui'
+# Form implementation generated from reading ui file 'unstyle.ui'
 #
 # Created: Tue Apr 21 20:37:24 2015
 #      by: PyQt5 UI code generator 5.3.2

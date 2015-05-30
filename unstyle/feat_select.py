@@ -8,7 +8,7 @@ from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.feature_selection import RFE
 from sklearn.svm import LinearSVC
 from sklearn.cluster import KMeans
-from stylproj.features.featregister import featregistry
+from unstyle.features.featregister import featregistry
 
 # TODO: Grid search with k-fold cross-validation on classifier in order to see
 # if better ranking results can be achieved.

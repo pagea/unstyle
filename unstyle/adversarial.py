@@ -1,6 +1,6 @@
 """Module containing functions related to defeating stylometry.
 """
-from stylproj.feat_select import ak_means_cluster
+from unstyle.feat_select import ak_means_cluster
 import numpy as np
 import random
 import sys

@@ -1,11 +1,11 @@
 """The feature extractor register. This keeps track of all feature extractors.
-We compose feature sets (subsets of stylproj's set of all feature extractors) by accessing this dictionary.
+We compose feature sets (subsets of unstyle's set of all feature extractors) by accessing this dictionary.
 
 ** The feature register should only be used by DocumentHandlers. **
 
 Note that the featregistry is ordered.
 
-Use the @register_feat decorator to register a feature extractor with stylproj.
+Use the @register_feat decorator to register a feature extractor with unstyle.
 """
 
 from collections import OrderedDict

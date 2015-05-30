@@ -1,4 +1,4 @@
-from stylproj.features.featregister import featregistry
+from unstyle.features.featregister import featregistry
 
 
 class FeatureSetExtractor:

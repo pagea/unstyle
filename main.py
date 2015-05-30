@@ -1,5 +1,5 @@
 if __name__ == '__main__':
     import sys
-    import stylproj.controller
-    from stylproj.controller import startGUI
+    import unstyle.controller
+    from unstyle.controller import startGUI
     startGUI()

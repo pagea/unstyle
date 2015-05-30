@@ -1,21 +1,21 @@
-stylproj.featuresets package
+unstyle.featuresets package
 ============================
 
 Submodules
 ----------
 
-stylproj.featuresets.basic9 module
+unstyle.featuresets.basic9 module
 ----------------------------------
 
-.. automodule:: stylproj.featuresets.basic9
+.. automodule:: unstyle.featuresets.basic9
     :members:
     :undoc-members:
     :show-inheritance:
 
-stylproj.featuresets.feature_extract module
+unstyle.featuresets.feature_extract module
 -------------------------------------------
 
-.. automodule:: stylproj.featuresets.feature_extract
+.. automodule:: unstyle.featuresets.feature_extract
     :members:
     :undoc-members:
     :show-inheritance:
@@ -24,7 +24,7 @@ stylproj.featuresets.feature_extract module
 Module contents
 ---------------
 
-.. automodule:: stylproj.featuresets
+.. automodule:: unstyle.featuresets
     :members:
     :undoc-members:
     :show-inheritance:

@@ -1,21 +1,21 @@
 # coding: utf-8
 # Generated from an ipython session. Played with cosine distance. Saved this for
 # future reference when we implement authorship verification.
-from stylproj.styl_math import cosine_distance
-from stylproj.styl_math import cosine_distance
-from stylproj.controller import load_document
-from stylproj.featuresets.basic9 import Basic9Extractor
-from stylproj.styl_math import cosine_distance
-from stylproj.featuresets.basic9 import Basic9Extractor
-from stylproj.dochandler import DocumentExtractor
-from stylproj.controller import load_doc
-from stylproj.controller import load_document
-docs1 = load_document("home/pagea/Code/stylproj/datasets/drexel_1/f/f_01.txt")
-docs1 = load_document("/home/pagea/Code/stylproj/datasets/drexel_1/f/f_01.txt")
-docs2 = load_document("/home/pagea/Code/stylproj/datasets/drexel_1/f/f_02.txt")
-docs3 = load_document("/home/pagea/Code/stylproj/datasets/drexel_1/f/f_03.txt")
-docs4 = load_document("/home/pagea/Code/stylproj/datasets/drexel_1/f/f_04.txt")
-doc = load_document("/home/pagea/Code/stylproj/datasets/drexel_1/f/f_05.txt")
+from unstyle.styl_math import cosine_distance
+from unstyle.styl_math import cosine_distance
+from unstyle.controller import load_document
+from unstyle.featuresets.basic9 import Basic9Extractor
+from unstyle.styl_math import cosine_distance
+from unstyle.featuresets.basic9 import Basic9Extractor
+from unstyle.dochandler import DocumentExtractor
+from unstyle.controller import load_doc
+from unstyle.controller import load_document
+docs1 = load_document("home/pagea/Code/unstyle/datasets/drexel_1/f/f_01.txt")
+docs1 = load_document("/home/pagea/Code/unstyle/datasets/drexel_1/f/f_01.txt")
+docs2 = load_document("/home/pagea/Code/unstyle/datasets/drexel_1/f/f_02.txt")
+docs3 = load_document("/home/pagea/Code/unstyle/datasets/drexel_1/f/f_03.txt")
+docs4 = load_document("/home/pagea/Code/unstyle/datasets/drexel_1/f/f_04.txt")
+doc = load_document("/home/pagea/Code/unstyle/datasets/drexel_1/f/f_05.txt")
 docs_features = DocumentExtractor(
     Basic9Extractor(), [docs1, docs2, docs3, docs4])
 docs_features = DocumentExtractor(
@@ -88,12 +88,12 @@ def cosine_distance(m, f):
     return ((m * f).sum() / (norm(m) * norm(f)))
 cosine_distance(docs_means, doc_features)
 cosine_distance(np.array([2.3, 1.16]), np.array([5.6, 8.2])).sum()
-auth1 = load_document("/home/pagea/Coe/stylproj/datasets/drexel_1/k/k_01.txt")
-auth1 = load_document("/home/pagea/Code/stylproj/datasets/drexel_1/k/k_01.txt")
-auth1 = load_document("/home/pagea/Code/stylproj/datasets/drexel_1/k/k_01.txt")
-auth2 = load_document("/home/pagea/Code/stylproj/datasets/drexel_1/k/k_02.txt")
-auth3 = load_document("/home/pagea/Code/stylproj/datasets/drexel_1/k/k_03.txt")
-auth4 = load_document("/home/pagea/Code/stylproj/datasets/drexel_1/k/k_04.txt")
+auth1 = load_document("/home/pagea/Coe/unstyle/datasets/drexel_1/k/k_01.txt")
+auth1 = load_document("/home/pagea/Code/unstyle/datasets/drexel_1/k/k_01.txt")
+auth1 = load_document("/home/pagea/Code/unstyle/datasets/drexel_1/k/k_01.txt")
+auth2 = load_document("/home/pagea/Code/unstyle/datasets/drexel_1/k/k_02.txt")
+auth3 = load_document("/home/pagea/Code/unstyle/datasets/drexel_1/k/k_03.txt")
+auth4 = load_document("/home/pagea/Code/unstyle/datasets/drexel_1/k/k_04.txt")
 auth_features = DocumentExtractor(
     Basic9Extractor(), [auth1, auth2, auth3, auth4]).docExtract()
 auth_features
@@ -108,7 +108,7 @@ pair2=1 - cosine_distance(docs_means, doc_features)
 pair2
 pair1 < pair2
 pair2 < pair1
-doc2=load_document("/home/pagea/Code/stylproj/datasets/drexel_1/h/h_01.txt")
+doc2=load_document("/home/pagea/Code/unstyle/datasets/drexel_1/h/h_01.txt")
 cosine_distance(docs_means, doc)
 cosine_distance(docs_means, doc_features)
 doc2_features=DocumentExtractor(Basic9Extractor(), [doc2])[0]

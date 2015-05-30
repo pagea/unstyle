@@ -1,8 +1,8 @@
 # Load, train, and classify documents.
 # This serves as a prototype for experimenting with document classification. This
 # module should NOT be referred to by any other classes.
-from stylproj.dochandler import DocumentExtractor
-from stylproj.featuresets.basic9 import Basic9Extractor
+from unstyle.dochandler import DocumentExtractor
+from unstyle.featuresets.basic9 import Basic9Extractor
 from sklearn import svm
 from sklearn import preprocessing
 from sklearn import cross_validation

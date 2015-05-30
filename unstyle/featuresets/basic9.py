@@ -1,6 +1,6 @@
-from stylproj.featuresets.feature_extract import FeatureSetExtractor
-from stylproj.features import characterfeatures
-from stylproj.features import lexicalfeatures
+from unstyle.featuresets.feature_extract import FeatureSetExtractor
+from unstyle.features import characterfeatures
+from unstyle.features import lexicalfeatures
 
 
 class Basic9Extractor(FeatureSetExtractor):
